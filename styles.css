@@ -1,16 +1,27 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background: #f4f4f4;
+    color: #333;
 }
 
+/* Container for all content */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
 header {
     background: #333;
     color: #fff;
-    padding: 10px 20px;
+    padding: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 header nav ul {
@@ -20,22 +31,50 @@ header nav ul {
 
 header nav ul li {
     display: inline;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 header nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
 }
 
+/* Hover effect for navigation */
+header nav ul li a:hover {
+    color: #c1c1c1;
+}
+
+/* Section Styles */
 section {
     padding: 20px;
-    margin: 0 10px;
+    margin-bottom: 20px;
     background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Project Items */
+.project {
+    margin-bottom: 20px;
+    border-left: 4px solid #333;
+    padding-left: 15px;
+}
+
+/* Contact Section */
+#contact {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+#contact a {
+    color: #50b3a2;
+    text-decoration: none;
+}
+
+/* Footer */
 footer {
     text-align: center;
     padding: 10px 0;
@@ -43,6 +82,18 @@ footer {
     color: #fff;
 }
 
-.project {
-    margin-bottom: 20px;
+/* Responsive design */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+
+    header, footer {
+        text-align: center;
+    }
+    
+    header nav ul li {
+        display: block;
+        margin-top: 5px;
+    }
 }
