@@ -3,42 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Home - [Your Name]</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <div class="sidebar">
+        <!-- Replace with your logo or initials -->
+        <div class="logo">[Your Initials]</div>
+        <nav class="sidebar-nav">
+            <a href="about.html">About</a>
+            <a href="skills.html">My Skills</a>
+            <a href="work.html">Work</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
+            <!-- Add your social media links here -->
         </nav>
-    </header>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi, I'm [Your Name], a computer science student passionate about building software that improves lives.</p>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Title 1</h3>
-            <p>Description of what the project does and what technologies were used.</p>
+    </div>
+    <div class="main-content">
+        <div class="hero">
+            <h1>Hi, I'm <span class="highlight">[Your Name]</span>,<br>web developer</h1>
+            <p class="tagline">Front End Developer / WordPress Expert</p>
+            <a href="contact.html" class="cta-button">Contact me!</a>
         </div>
-        <!-- Repeat for other projects -->
-    </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-    </section>
-
-    <footer>
-        <p>Copyright © [Your Year] Saatvik Rao</p>
-    </footer>
+    </div>
+    <script src="js/main.js"></script>
 </body>
 </html>
