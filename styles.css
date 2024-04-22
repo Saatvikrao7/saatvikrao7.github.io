@@ -1,99 +1,100 @@
-/* General Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+/* Reset some basic elements */
+body, h1, p {
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
-    color: #333;
 }
 
-/* Container for all content */
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-/* Header */
-header {
-    background: #333;
+body {
+    font-family: 'Arial', sans-serif;
     color: #fff;
-    padding: 20px;
+    background-color: #333;
+    overflow-x: hidden;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background: #222;
+    padding: 20px 0;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-header nav ul {
-    list-style: none;
-    padding: 0;
+.logo {
+    margin-bottom: 50px;
+    /* Add styles for your logo here */
 }
 
-header nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Hover effect for navigation */
-header nav ul li a:hover {
-    color: #c1c1c1;
-}
-
-/* Section Styles */
-section {
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Project Items */
-.project {
-    margin-bottom: 20px;
-    border-left: 4px solid #333;
-    padding-left: 15px;
-}
-
-/* Contact Section */
-#contact {
-    background: #333;
-    color: #fff;
+.sidebar-nav a {
+    display: block;
     padding: 10px;
-    text-align: center;
-}
-
-#contact a {
-    color: #50b3a2;
+    color: white;
     text-decoration: none;
+    transition: all 0.3s;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #333;
-    color: #fff;
+.sidebar-nav a:hover {
+    background: #444;
 }
 
-/* Responsive design */
-@media only screen and (max-width: 600px) {
-    .container {
-        width: 95%;
+/* Main content styles */
+.main-content {
+    margin-left: 250px;
+    padding: 40px;
+}
+
+.hero {
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.highlight {
+    color: #e74c3c; /* Adjust the color to match your design */
+}
+
+.tagline {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #e74c3c; /* Adjust the button color to match your design */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #c0392b; /* Darken button on hover */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
     }
 
-    header, footer {
-        text-align: center;
+    .sidebar-nav a {
+        display: inline;
+        padding: 20px;
     }
-    
-    header nav ul li {
-        display: block;
-        margin-top: 5px;
+
+    .main-content {
+        margin: 0;
+    }
+
+    .hero h1 {
+        font-size: 2em;
     }
 }
