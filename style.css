@@ -281,6 +281,17 @@ a {
 .project-img-3 { background: #ede8f0; }
 .project-img-4 { background: #e8edf0; }
 
+/* Single featured card */
+.projects-grid--single {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-card--featured .project-info p {
+    max-width: 720px;
+}
+
 .project-card:hover .project-img-inner {
     transform: scale(1.04);
 }
