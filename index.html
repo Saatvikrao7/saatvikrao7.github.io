@@ -3,34 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saatvik Rao</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>Saatvik Rao | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <main>
-        <div class="hero">
-            <h1>Saatvik Rao</h1>
-            <p class="intro-text">
-                <p>As a Senior Computer Science student, I'm eager to complement my academic foundation</p>
-            <p>with hands-on experience in software development, which is my passion.</p>
-            <p>My goal is to acquire practical insights from the real world and foster the growth</p>
-            <p>of my career in this dynamic field.</p>
-            </p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/saatvik-rao/" target="_blank" title="LinkedIn">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/Saatvikrao7" target="_blank" title="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="Final_Resume.pdf" download="Saatvik_Rao_Resume.pdf" title="Download Resume">
-                    <i class="fa-solid fa-file-download"></i>
-                </a>
-            </div>
-            <a href="#work" class="cta-button">View My Work</a>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">SR</div>
+        <div class="nav-links">
+            <a href="#about">about</a>
+            <a href="#projects">portfolio</a>
+            <a href="#personal">projects</a>
+            <a href="#about">skills</a>
+            <a href="#contact">contact</a>
         </div>
-    </main>
+        <div class="nav-social">
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+            </a>
+            <a href="#" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1 class="hero-word">developer</h1>
+            <p class="hero-sub">CS grad from Arizona State<br>who builds things that matter.</p>
+        </div>
+
+        <div class="hero-center">
+            <div class="hero-photo">
+                <div class="photo-placeholder">
+                    <span>Your<br>Photo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <h1 class="hero-word mono" data-hover="@Deloitte">&lt;consultant&gt;</h1>
+            <p class="hero-sub">Software Developer Consultant<br>at Deloitte, shipping at scale.</p>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-label">SOME OF MY LATEST WORK</div>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+        <div class="projects-grid">
+
+            <article class="project-card" style="cursor:default">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-1">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <polyline points="10,90 35,55 60,68 90,28 120,38 150,12" stroke="#111" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                            <circle cx="35" cy="55" r="4" fill="#111"/>
+                            <circle cx="90" cy="28" r="4" fill="#111"/>
+                            <circle cx="150" cy="12" r="4" fill="#111"/>
+                            <line x1="10" y1="95" x2="150" y2="95" stroke="#ddd" stroke-width="1"/>
+                            <line x1="10" y1="12" x2="10" y2="95" stroke="#ddd" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Deloitte · CDPH</span>
+                    <h3>NBS 2.0 — Newborn Screening Application</h3>
+                    <p>Leading deployment of California's largest newborn screening platform, modernizing genetic disease detection for millions of infants statewide.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-2">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <rect x="20" y="20" width="50" height="70" rx="3" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <rect x="90" y="20" width="50" height="70" rx="3" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <line x1="70" y1="55" x2="90" y2="55" stroke="#111" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="80" cy="55" r="4" fill="#fff" stroke="#111" stroke-width="1.5"/>
+                            <line x1="30" y1="36" x2="60" y2="36" stroke="#aaa" stroke-width="1"/>
+                            <line x1="30" y1="46" x2="55" y2="46" stroke="#aaa" stroke-width="1"/>
+                            <line x1="30" y1="56" x2="60" y2="56" stroke="#aaa" stroke-width="1"/>
+                            <line x1="100" y1="36" x2="130" y2="36" stroke="#aaa" stroke-width="1"/>
+                            <line x1="100" y1="46" x2="125" y2="46" stroke="#aaa" stroke-width="1"/>
+                            <line x1="100" y1="56" x2="130" y2="56" stroke="#aaa" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Data Migration · SSIS / SSMS</span>
+                    <h3>SSIS & SSMS Data Migration Packages</h3>
+                    <p>Core focus of the project — designing and building SSIS packages and SSMS workflows to migrate years of sensitive health records into NBS 2.0 with zero data loss.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-3">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <rect x="20" y="25" width="55" height="60" rx="4" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <rect x="30" y="35" width="35" height="8" rx="2" fill="#111" opacity="0.12" stroke="#111" stroke-width="1"/>
+                            <rect x="30" y="49" width="25" height="8" rx="2" fill="#111" opacity="0.08" stroke="#111" stroke-width="1"/>
+                            <rect x="30" y="63" width="30" height="8" rx="2" fill="#111" opacity="0.12" stroke="#111" stroke-width="1"/>
+                            <path d="M75 55 L95 55" stroke="#111" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <rect x="95" y="35" width="45" height="40" rx="4" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <circle cx="117" cy="47" r="7" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <line x1="117" y1="54" x2="117" y2="67" stroke="#111" stroke-width="1.5"/>
+                            <line x1="110" y1="60" x2="124" y2="60" stroke="#111" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Dynamics 365 · Power Platform</span>
+                    <h3>Power Platform Bug Fixes & Support</h3>
+                    <p>Diagnosed and resolved bugs across Power Platform and Dynamics 365, keeping critical workflows running smoothly for CDPH's genetic screening operations.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-4">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <ellipse cx="80" cy="45" rx="48" ry="28" stroke="#111" stroke-width="1.5" fill="none"/>
+                            <ellipse cx="80" cy="45" rx="48" ry="28" stroke="#111" stroke-width="0" fill="#111" opacity="0.04"/>
+                            <line x1="80" y1="17" x2="80" y2="73" stroke="#111" stroke-width="1" stroke-dasharray="4 3"/>
+                            <line x1="32" y1="45" x2="128" y2="45" stroke="#111" stroke-width="1" stroke-dasharray="4 3"/>
+                            <circle cx="80" cy="45" r="6" fill="#fff" stroke="#111" stroke-width="1.5"/>
+                            <path d="M80 73 L80 90" stroke="#111" stroke-width="1.5"/>
+                            <line x1="65" y1="90" x2="95" y2="90" stroke="#111" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Azure · Dynamics 365</span>
+                    <h3>NBS 2.0 Environment & Integration</h3>
+                    <p>Supported the setup and configuration of Azure and Dynamics 365 environments as part of the NBS 2.0 rollout for California's genetic disease screening program.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Personal Projects -->
+    <div class="section-label" id="personal">PERSONAL PROJECTS</div>
+
+    <section class="projects personal-projects">
+        <div class="projects-grid personal-grid">
+
+            <article class="project-card reveal">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-bot">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <!-- Candlestick chart -->
+                            <line x1="30" y1="25" x2="30" y2="85" stroke="#bbb" stroke-width="1"/>
+                            <rect x="24" y="38" width="12" height="28" rx="1" fill="#111"/>
+                            <line x1="60" y1="20" x2="60" y2="75" stroke="#bbb" stroke-width="1"/>
+                            <rect x="54" y="30" width="12" height="22" rx="1" fill="#ccc" stroke="#111" stroke-width="1"/>
+                            <line x1="90" y1="30" x2="90" y2="80" stroke="#bbb" stroke-width="1"/>
+                            <rect x="84" y="42" width="12" height="25" rx="1" fill="#111"/>
+                            <line x1="120" y1="18" x2="120" y2="65" stroke="#bbb" stroke-width="1"/>
+                            <rect x="114" y="28" width="12" height="20" rx="1" fill="#ccc" stroke="#111" stroke-width="1"/>
+                            <!-- Signal line -->
+                            <polyline points="30,52 60,41 90,54 120,38" stroke="#111" stroke-width="1.5" fill="none" stroke-dasharray="5 3"/>
+                            <!-- Arrow -->
+                            <path d="M138 30 L150 22 L150 32" fill="#111"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Python · Alpaca API · In Progress</span>
+                    <h3>Autonomous Day Trading Bot</h3>
+                    <p>Algorithmic trading system with automated signal detection, position sizing, and risk management. Built with Python using live market data from Alpaca.</p>
+                </div>
+            </article>
+
+            <article class="project-card project-card--locked reveal">
+                <div class="project-img">
+                    <div class="project-img-inner project-img-soon">
+                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
+                            <rect x="55" y="48" width="50" height="38" rx="4" stroke="#bbb" stroke-width="1.5" fill="none"/>
+                            <path d="M68 48V38a12 12 0 0124 0v10" stroke="#bbb" stroke-width="1.5" fill="none"/>
+                            <circle cx="80" cy="67" r="5" fill="#bbb"/>
+                            <line x1="80" y1="72" x2="80" y2="78" stroke="#bbb" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Coming Soon</span>
+                    <h3>??? — Under Wraps</h3>
+                    <p>Something new is in the works. Stay tuned.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Skills / About -->
+    <section class="about-section" id="about">
+        <div class="about-inner">
+            <div class="about-left">
+                <p class="about-label">WHO I AM</p>
+                <h2 class="about-heading">Engineer.<br>Consultant.<br>Builder.</h2>
+            </div>
+            <div class="about-right">
+                <p>I'm a <strong>Computer Science graduate from Arizona State University</strong> (December 2024) and a Software Developer Consultant at <strong>Deloitte</strong>, where I work with the California Department of Public Health on their Genetic Disease Screening Program.</p>
+                <p>Currently helping deploy <strong>NBS 2.0</strong> — the biggest application in CDPH's history — primarily building SSIS and SSMS packages for data migration, alongside Power Platform bug fixes and Dynamics 365 support.</p>
+                <div class="skills-row">
+                    <div class="skill-group">
+                        <h4>Technologies</h4>
+                        <span>SSMS / SSIS</span>
+                        <span>Azure Database</span>
+                        <span>Dynamics 365</span>
+                        <span>Power Platform</span>
+                    </div>
+                    <div class="skill-group">
+                        <h4>Domains</h4>
+                        <span>Data Migration</span>
+                        <span>Cloud Infrastructure</span>
+                        <span>Enterprise Apps</span>
+                        <span>Healthcare IT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <p class="contact-label">GET IN TOUCH</p>
+        <h2 class="contact-heading">Let's work<br><em>together.</em></h2>
+        <a href="mailto:hello@saatvikrao.com" class="contact-btn">Say Hello</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>© 2026 Saatvik Rao</span>
+        <div class="footer-social">
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
