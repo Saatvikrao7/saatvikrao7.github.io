@@ -1,5 +1,5 @@
 /* =====================================================
-   PORTFOLIO — Interactive JS
+   PORTFOLIO — Apple-style Scroll Animations
    ===================================================== */
 
 // ── 1. Custom Cursor ──────────────────────────────────
@@ -18,7 +18,6 @@ document.addEventListener('mousemove', e => {
     cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
 });
 
-// Ring lags behind dot
 (function animateRing() {
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
@@ -26,158 +25,188 @@ document.addEventListener('mousemove', e => {
     requestAnimationFrame(animateRing);
 })();
 
-// Cursor grows on hover over interactive elements
-document.querySelectorAll('a, button, .project-card, .contact-btn').forEach(el => {
+document.querySelectorAll('a, button, .p-card, .contact-btn, .skill-pill, .nav-logo').forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-ring--hover'));
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-ring--hover'));
 });
 
+function updateCursorTheme(theme) {
+    if (theme === 'dark') {
+        cursorDot.style.background = '#22d3ee';
+        cursorRing.style.borderColor = 'rgba(34,211,238,0.4)';
+    } else {
+        cursorDot.style.background = '#6366f1';
+        cursorRing.style.borderColor = 'rgba(99,102,241,0.4)';
+    }
+}
 
-// ── 2. Page Load Reveal ───────────────────────────────
+
+// ── 2. Page Load — Hero Entrance ──────────────────────
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 
-    // Stagger hero elements
-    const heroEls = [
-        document.querySelector('.hero-left'),
-        document.querySelector('.hero-center'),
-        document.querySelector('.hero-right'),
+    // Animate hero name char by char
+    const heroName = document.querySelector('.hero-name');
+    if (heroName) {
+        const html = heroName.innerHTML;
+        const chars = [];
+        let inTag = false;
+        let i = 0;
+
+        // Split text nodes only (preserve <br>)
+        heroName.innerHTML = html.replace(/(<br>)|([^<])/g, (match, br, ch) => {
+            if (br) return '<br>';
+            return `<span class="char" style="display:inline-block;opacity:0;transform:translateY(40px)">${ch}</span>`;
+        });
+
+        heroName.querySelectorAll('.char').forEach((ch, idx) => {
+            setTimeout(() => {
+                ch.style.transition = 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1)';
+                ch.style.opacity = '1';
+                ch.style.transform = 'translateY(0)';
+            }, 250 + idx * 38);
+        });
+    }
+
+    // Stagger remaining hero elements
+    const heroStagger = [
+        document.querySelector('.hero-eyebrow'),
+        document.querySelector('.hero-roles'),
+        document.querySelector('.hero-sub'),
+        document.querySelector('.hero-photo-wrap'),
     ];
-    heroEls.forEach((el, i) => {
+
+    heroStagger.forEach((el, i) => {
         if (!el) return;
         el.style.opacity = '0';
-        el.style.transform = 'translateY(32px)';
-        el.style.transition = `opacity 0.8s ease ${i * 0.15 + 0.2}s, transform 0.8s ease ${i * 0.15 + 0.2}s`;
+        el.style.transform = 'translateY(28px)';
+        el.style.transition = `opacity 0.75s ease ${0.65 + i * 0.15}s, transform 0.75s ease ${0.65 + i * 0.15}s`;
         requestAnimationFrame(() => {
             el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
+            el.style.transform = 'none';
         });
     });
 });
 
 
-// ── 3. Scroll Reveal (staggered) ─────────────────────
+// ── 3. Scroll Reveal (IntersectionObserver) ───────────
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+            entry.target.classList.add('in-view');
             revealObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.08 });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-document.querySelectorAll('.project-card, .about-inner, .contact-section, .section-label').forEach((el, i) => {
-    el.classList.add('will-reveal');
-    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+// Stagger skill pills
+document.querySelectorAll('.skill-pill').forEach((pill, i) => {
+    pill.style.transitionDelay = `${i * 0.07}s`;
+    revealObserver.observe(pill);
+});
+
+// All other reveal elements
+document.querySelectorAll('.reveal, .reveal-left, .contact-line').forEach(el => {
     revealObserver.observe(el);
 });
 
 
-// ── 4. 3D Card Tilt ───────────────────────────────────
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const rect  = card.getBoundingClientRect();
-        const cx    = rect.left + rect.width  / 2;
-        const cy    = rect.top  + rect.height / 2;
-        const dx    = (e.clientX - cx) / (rect.width  / 2);
-        const dy    = (e.clientY - cy) / (rect.height / 2);
-        const tiltX = dy * -6;
-        const tiltY = dx *  6;
-        card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+// ── 4. SVG Draw-on-Scroll ─────────────────────────────
+function initSvgLines() {
+    document.querySelectorAll('.svg-draw-line').forEach(line => {
+        const len = line.getTotalLength ? line.getTotalLength() : 500;
+        line.style.strokeDasharray = len;
+        line.style.strokeDashoffset = len;
     });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
-    });
-});
-
-
-// ── 5. Magnetic Button ────────────────────────────────
-document.querySelectorAll('.contact-btn, .nav-logo').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        const cx   = rect.left + rect.width  / 2;
-        const cy   = rect.top  + rect.height / 2;
-        const dx   = (e.clientX - cx) * 0.35;
-        const dy   = (e.clientY - cy) * 0.35;
-        btn.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0, 0)';
-        btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-        setTimeout(() => { btn.style.transition = ''; }, 500);
-    });
-});
-
-
-// ── 6. Text Scramble on Hero Hover ───────────────────
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789<>/';
-
-function scrambleTo(el, target, onDone) {
-    // cancel any running scramble
-    if (el._scrambleInterval) clearInterval(el._scrambleInterval);
-    let frame = 0;
-    const totalFrames = 20;
-    el._scrambleInterval = setInterval(() => {
-        el.innerText = target.split('').map((ch, i) => {
-            if (ch === ' ') return ' ';
-            if (frame / totalFrames > i / target.length) return ch;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-        }).join('');
-        if (++frame > totalFrames) {
-            el.innerText = target;
-            clearInterval(el._scrambleInterval);
-            el._scrambleInterval = null;
-            if (onDone) onDone();
-        }
-    }, 32);
 }
 
-document.querySelectorAll('.hero-word').forEach(el => {
-    const original = el.innerText;
-    const hoverText = el.dataset.hover || null;
+const workVisual = document.querySelector('.work-visual');
+if (workVisual) {
+    initSvgLines();
 
-    if (hoverText) {
-        el.addEventListener('mouseenter', () => scrambleTo(el, hoverText));
-        el.addEventListener('mouseleave', () => scrambleTo(el, original));
-    } else {
-        el.addEventListener('mouseenter', () => scrambleTo(el, original));
-    }
-});
+    const svgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.svg-draw-line').forEach((line, i) => {
+                    setTimeout(() => line.classList.add('drawn'), i * 220);
+                });
+                const fill = document.querySelector('.chart-fill');
+                if (fill) setTimeout(() => fill.classList.add('shown'), 1200);
+                svgObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.35 });
+
+    svgObserver.observe(workVisual);
+}
 
 
-// ── 7. Hero Parallax on Scroll ────────────────────────
-const heroPhoto = document.querySelector('.hero-center');
-const heroLeft  = document.querySelector('.hero-left');
-const heroRight = document.querySelector('.hero-right');
+// ── 5. Hero Parallax + Fade ───────────────────────────
+const heroContent  = document.querySelector('.hero-content');
+const heroGlows    = document.querySelectorAll('.hero-glow');
 
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    if (heroPhoto) heroPhoto.style.transform = `translateY(${y * 0.12}px)`;
-    if (heroLeft)  heroLeft.style.transform  = `translateY(${y * 0.06}px)`;
-    if (heroRight) heroRight.style.transform = `translateY(${y * 0.06}px)`;
+    const vh = window.innerHeight;
+    const progress = Math.min(y / vh, 1);
+
+    if (heroContent) {
+        heroContent.style.opacity = Math.max(0, 1 - progress * 1.3).toString();
+        heroContent.style.transform = `translateY(${y * 0.08}px)`;
+    }
+
+    heroGlows.forEach(g => {
+        g.style.transform = `translateY(${y * 0.05}px)`;
+    });
 }, { passive: true });
 
 
-// ── 8. Nav active link on scroll ─────────────────────
-const sections  = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nav-links a');
+// ── 6. Nav: theme + active + scrolled ─────────────────
+const nav      = document.querySelector('#main-nav');
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id]');
+
+const sectionThemes = {
+    hero:     'dark',
+    work:     'dark',
+    skills:   'light',
+    personal: 'dark',
+    contact:  'light',
+};
 
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('nav-active'));
-            const active = [...navLinks].find(l => l.getAttribute('href') === `#${entry.target.id}`);
+            const id = entry.target.id;
+            // Active link
+            navLinks.forEach(l => l.classList.remove('nav-active'));
+            const active = [...navLinks].find(l => l.getAttribute('href') === `#${id}`);
             if (active) active.classList.add('nav-active');
+            // Nav theme
+            const theme = sectionThemes[id] || 'light';
+            nav.dataset.theme = theme;
+            updateCursorTheme(theme);
         }
     });
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObserver.observe(s));
 
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+}, { passive: true });
 
-// ── 9. Smooth scroll ─────────────────────────────────
+
+// ── 7. Scroll Progress Bar ────────────────────────────
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (progressBar) progressBar.style.width = `${(scrolled / maxScroll) * 100}%`;
+}, { passive: true });
+
+
+// ── 8. Smooth Scroll ──────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
@@ -187,8 +216,58 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 
-// ── 10. Nav shrink on scroll ──────────────────────────
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
-}, { passive: true });
+// ── 9. 3D Card Tilt (Personal Projects) ───────────────
+document.querySelectorAll('.p-card:not(.p-card--locked)').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const cx   = rect.left + rect.width  / 2;
+        const cy   = rect.top  + rect.height / 2;
+        const dx   = (e.clientX - cx) / (rect.width  / 2);
+        const dy   = (e.clientY - cy) / (rect.height / 2);
+        card.style.transform = `perspective(900px) rotateX(${dy * -4}deg) rotateY(${dx * 4}deg) scale(1.015)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+});
+
+
+// ── 10. Magnetic Contact Button ───────────────────────
+const contactBtn = document.querySelector('.contact-btn');
+if (contactBtn) {
+    contactBtn.addEventListener('mousemove', e => {
+        const rect = contactBtn.getBoundingClientRect();
+        const dx   = (e.clientX - rect.left - rect.width  / 2) * 0.35;
+        const dy   = (e.clientY - rect.top  - rect.height / 2) * 0.35;
+        contactBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+
+    contactBtn.addEventListener('mouseleave', () => {
+        contactBtn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), all 0.25s ease';
+        contactBtn.style.transform  = 'translate(0, 0)';
+        setTimeout(() => { contactBtn.style.transition = ''; }, 500);
+    });
+}
+
+
+// ── 11. Text Scramble on Hero Name Hover ──────────────
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function scrambleTo(el, target) {
+    if (el._scramble) clearInterval(el._scramble);
+    let frame = 0;
+    const total = 18;
+    el._scramble = setInterval(() => {
+        el.innerText = target.split('').map((ch, i) => {
+            if (ch === ' ' || ch === '\n') return ch;
+            if (frame / total > i / target.length) return ch;
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }).join('');
+        if (++frame > total) {
+            el.innerText = target;
+            clearInterval(el._scramble);
+            el._scramble = null;
+        }
+    }, 32);
+}

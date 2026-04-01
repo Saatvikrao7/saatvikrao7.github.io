@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saatvik Rao | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="nav">
+    <!-- Nav -->
+    <nav class="nav" id="main-nav" data-theme="dark">
         <div class="nav-logo">SR</div>
         <div class="nav-links">
-            <a href="#about">about</a>
-            <a href="#projects">portfolio</a>
+            <a href="#hero">home</a>
+            <a href="#work">work</a>
+            <a href="#skills">skills</a>
             <a href="#personal">projects</a>
-            <a href="#about">skills</a>
             <a href="#contact">contact</a>
         </div>
         <div class="nav-social">
-<a href="https://www.linkedin.com/in/saatvik-rao" target="_blank" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/saatvik-rao" target="_blank" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
             </a>
             <a href="https://github.com/Saatvikrao7" target="_blank" aria-label="GitHub">
@@ -30,117 +30,273 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-left">
-            <h1 class="hero-word">developer</h1>
-            <p class="hero-sub">CS grad from Arizona State<br>who builds things that matter.</p>
-        </div>
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progress-bar"></div>
 
-        <div class="hero-center">
-            <div class="hero-photo">
+    <!-- ─── HERO ─── -->
+    <section class="s-hero" id="hero">
+        <svg class="hero-grid-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" opacity="0.06"/>
+        </svg>
+
+        <div class="hero-glow hero-glow--indigo"></div>
+        <div class="hero-glow hero-glow--cyan"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Software Developer Consultant · Deloitte</p>
+                <h1 class="hero-name">Saatvik<br>Rao</h1>
+                <div class="hero-roles">
+                    <span class="role-pill role-pill--indigo">developer</span>
+                    <span class="role-pill role-pill--cyan">&lt;consultant&gt;</span>
+                </div>
+                <p class="hero-sub">CS grad from Arizona State who builds things that matter.</p>
+            </div>
+
+            <div class="hero-photo-wrap">
+                <div class="hero-photo-ring"></div>
                 <div class="photo-placeholder">
                     <span>Your<br>Photo</span>
                 </div>
             </div>
         </div>
 
-        <div class="hero-right">
-            <h1 class="hero-word mono" data-hover="@Deloitte">&lt;consultant&gt;</h1>
-            <p class="hero-sub">Software Developer Consultant<br>at Deloitte, shipping at scale.</p>
+        <div class="scroll-indicator">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Divider -->
-    <div class="section-label">SOME OF MY LATEST WORK</div>
+    <!-- ─── WORK ─── -->
+    <section class="s-work" id="work">
+        <div class="section-eyebrow reveal-left">LATEST WORK</div>
 
-    <!-- Projects -->
-    <section class="projects" id="projects">
-        <div class="projects-grid projects-grid--single">
+        <div class="work-header">
+            <div class="work-meta reveal">
+                <span class="work-num">01</span>
+                <span class="work-client">Deloitte · CDPH</span>
+            </div>
+            <h2 class="work-title reveal delay-1">NBS 2.0 — Newborn<br>Screening Application</h2>
+        </div>
 
-            <article class="project-card project-card--featured" style="cursor:default">
-                <div class="project-img">
-                    <div class="project-img-inner project-img-1">
-                        <svg viewBox="0 0 320 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:320px;height:110px;">
-                            <!-- Data flow diagram -->
-                            <rect x="10" y="30" width="60" height="50" rx="4" stroke="#111" stroke-width="1.5" fill="none"/>
-                            <line x1="20" y1="45" x2="60" y2="45" stroke="#aaa" stroke-width="1"/>
-                            <line x1="20" y1="55" x2="55" y2="55" stroke="#aaa" stroke-width="1"/>
-                            <line x1="20" y1="65" x2="60" y2="65" stroke="#aaa" stroke-width="1"/>
-                            <path d="M70 55 L100 55" stroke="#111" stroke-width="1.5" stroke-dasharray="4 3"/>
-                            <circle cx="85" cy="55" r="4" fill="#fff" stroke="#111" stroke-width="1.5"/>
-                            <!-- Server -->
-                            <rect x="100" y="25" width="55" height="60" rx="4" stroke="#111" stroke-width="1.5" fill="none"/>
-                            <ellipse cx="127" cy="45" rx="18" ry="10" stroke="#111" stroke-width="1.2" fill="none"/>
-                            <line x1="109" y1="55" x2="145" y2="55" stroke="#111" stroke-width="1"/>
-                            <line x1="109" y1="65" x2="145" y2="65" stroke="#111" stroke-width="1"/>
-                            <path d="M155 55 L185 55" stroke="#111" stroke-width="1.5" stroke-dasharray="4 3"/>
-                            <!-- Cloud -->
-                            <ellipse cx="220" cy="45" rx="30" ry="18" stroke="#111" stroke-width="1.5" fill="none" opacity="0.08" fill="#111"/>
-                            <ellipse cx="220" cy="45" rx="30" ry="18" stroke="#111" stroke-width="1.5" fill="none"/>
-                            <circle cx="220" cy="45" r="6" fill="#fff" stroke="#111" stroke-width="1.5"/>
-                            <!-- Chart -->
-                            <polyline points="265,70 280,50 295,58 310,30" stroke="#111" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-                            <circle cx="310" cy="30" r="3" fill="#111"/>
-                        </svg>
-                    </div>
+        <div class="work-card">
+            <div class="work-card-left reveal delay-1">
+                <div class="work-tags">
+                    <span class="tag tag--cyan">SSIS / SSMS</span>
+                    <span class="tag tag--blue">Azure</span>
+                    <span class="tag tag--teal">Dynamics 365</span>
+                    <span class="tag tag--purple">Power Platform</span>
+                    <span class="tag tag--slate">Data Migration</span>
+                    <span class="tag tag--slate">Healthcare IT</span>
                 </div>
-                <div class="project-info">
-                    <span class="project-tag">Deloitte · CDPH · SSIS / SSMS · Azure · Dynamics 365 · Power Platform</span>
-                    <h3>NBS 2.0 — Newborn Screening Application</h3>
-                    <p>Leading deployment of California's largest newborn screening platform, modernizing genetic disease detection for millions of infants statewide. Core focus on designing and building SSIS packages and SSMS workflows to migrate years of sensitive health records with zero data loss. Diagnosed and resolved bugs across Power Platform and Dynamics 365, keeping critical workflows running smoothly. Collaborated directly with client stakeholders to troubleshoot and resolve database and migration issues, ensuring seamless delivery.</p>
+                <div class="work-desc reveal delay-2">
+                    <p>Leading deployment of California's largest newborn screening platform, modernizing genetic disease detection for millions of infants statewide.</p>
+                    <p>Core focus on designing and building SSIS packages and SSMS workflows to migrate years of sensitive health records with zero data loss. Diagnosed and resolved bugs across Power Platform and Dynamics 365, keeping critical workflows running smoothly. Collaborated directly with client stakeholders to troubleshoot and resolve database and migration issues, ensuring seamless delivery.</p>
                 </div>
-            </article>
+            </div>
 
+            <div class="work-card-right reveal delay-2">
+                <div class="work-visual">
+                    <svg class="work-svg" viewBox="0 0 440 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Grid -->
+                        <line x1="0" y1="60" x2="440" y2="60" stroke="#1e3a5f" stroke-width="1"/>
+                        <line x1="0" y1="120" x2="440" y2="120" stroke="#1e3a5f" stroke-width="1"/>
+                        <line x1="0" y1="180" x2="440" y2="180" stroke="#1e3a5f" stroke-width="1"/>
+
+                        <!-- DB icon (static) -->
+                        <ellipse cx="55" cy="195" rx="30" ry="11" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <rect x="25" y="195" width="60" height="24" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <ellipse cx="55" cy="219" rx="30" ry="11" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <text x="41" y="240" font-family="JetBrains Mono" font-size="8" fill="#64748b">SSMS/SSIS</text>
+
+                        <!-- DB to server connector -->
+                        <path class="svg-draw-line" d="M 85 207 L 140 207" stroke="#22d3ee" stroke-width="1.8" filter="url(#glow)"/>
+                        <polygon points="140,203 150,207 140,211" fill="#22d3ee"/>
+
+                        <!-- Server (static) -->
+                        <rect x="150" y="183" width="55" height="48" rx="4" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <line x1="150" y1="197" x2="205" y2="197" stroke="#475569" stroke-width="1"/>
+                        <line x1="150" y1="210" x2="205" y2="210" stroke="#475569" stroke-width="1"/>
+                        <circle cx="160" cy="190" r="3" fill="#22d3ee" opacity="0.7"/>
+                        <text x="157" y="244" font-family="JetBrains Mono" font-size="8" fill="#64748b">Azure</text>
+
+                        <!-- Server to cloud connector -->
+                        <path class="svg-draw-line" d="M 205 207 L 255 207" stroke="#2dd4bf" stroke-width="1.8" filter="url(#glow)"/>
+                        <polygon points="255,203 265,207 255,211" fill="#2dd4bf"/>
+
+                        <!-- Cloud (static) -->
+                        <ellipse cx="300" cy="200" rx="35" ry="20" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <path d="M 275 200 Q 285 185 300 192 Q 315 185 325 200" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                        <text x="276" y="232" font-family="JetBrains Mono" font-size="8" fill="#64748b">Dynamics</text>
+
+                        <!-- Cloud to chart connector -->
+                        <path class="svg-draw-line" d="M 335 200 L 375 200 L 375 160" stroke="#60a5fa" stroke-width="1.8" filter="url(#glow)"/>
+
+                        <!-- Chart line (draw animation) -->
+                        <path class="svg-draw-line" d="M 375 160 L 390 130 L 405 145 L 420 95 L 435 75" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+
+                        <!-- Chart area fill (static, reveals with opacity) -->
+                        <path class="chart-fill" d="M 375 160 L 390 130 L 405 145 L 420 95 L 435 75 L 435 200 L 375 200 Z" fill="url(#chartGrad)" opacity="0"/>
+
+                        <!-- Data points -->
+                        <circle class="svg-dot" cx="390" cy="130" r="4" fill="#22d3ee"/>
+                        <circle class="svg-dot" cx="420" cy="95" r="4" fill="#0ea5e9"/>
+                        <circle class="svg-dot" cx="435" cy="75" r="4" fill="#38bdf8"/>
+
+                        <!-- Y-axis labels -->
+                        <text x="4" y="64" font-family="JetBrains Mono" font-size="7" fill="#334155">HIGH</text>
+                        <text x="4" y="184" font-family="JetBrains Mono" font-size="7" fill="#334155">LOW</text>
+                    </svg>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Personal Projects -->
-    <div class="section-label" id="personal">PERSONAL PROJECTS</div>
+    <!-- ─── SKILLS ─── -->
+    <section class="s-skills" id="skills">
+        <div class="section-eyebrow reveal-left">WHO I AM</div>
 
-    <section class="projects personal-projects">
-        <div class="projects-grid personal-grid">
+        <div class="skills-inner">
+            <div class="skills-left reveal-left">
+                <h2 class="skills-heading">Engineer.<br><span class="accent-cyan">Consultant.</span><br>Builder.</h2>
+            </div>
 
-            <article class="project-card reveal">
-                <div class="project-img">
-                    <div class="project-img-inner project-img-bot">
-                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
-                            <!-- Candlestick chart -->
-                            <line x1="30" y1="25" x2="30" y2="85" stroke="#bbb" stroke-width="1"/>
-                            <rect x="24" y="38" width="12" height="28" rx="1" fill="#111"/>
-                            <line x1="60" y1="20" x2="60" y2="75" stroke="#bbb" stroke-width="1"/>
-                            <rect x="54" y="30" width="12" height="22" rx="1" fill="#ccc" stroke="#111" stroke-width="1"/>
-                            <line x1="90" y1="30" x2="90" y2="80" stroke="#bbb" stroke-width="1"/>
-                            <rect x="84" y="42" width="12" height="25" rx="1" fill="#111"/>
-                            <line x1="120" y1="18" x2="120" y2="65" stroke="#bbb" stroke-width="1"/>
-                            <rect x="114" y="28" width="12" height="20" rx="1" fill="#ccc" stroke="#111" stroke-width="1"/>
-                            <!-- Signal line -->
-                            <polyline points="30,52 60,41 90,54 120,38" stroke="#111" stroke-width="1.5" fill="none" stroke-dasharray="5 3"/>
-                            <!-- Arrow -->
-                            <path d="M138 30 L150 22 L150 32" fill="#111"/>
-                        </svg>
+            <div class="skills-right">
+                <p class="reveal delay-1">I'm a <strong>Computer Science graduate from Arizona State University</strong> (December 2024) and a Software Developer Consultant at <strong>Deloitte</strong>, working with the California Department of Public Health on their Genetic Disease Screening Program.</p>
+                <p class="reveal delay-2">Currently helping deploy <strong>NBS 2.0</strong> — the biggest application in CDPH's history — building SSIS and SSMS packages for data migration, alongside Power Platform bug fixes and Dynamics 365 support.</p>
+
+                <div class="skill-categories">
+                    <div class="skill-category reveal delay-3">
+                        <h4 class="skill-cat-title">Technologies</h4>
+                        <div class="skill-pills">
+                            <span class="skill-pill pill--blue">SSMS</span>
+                            <span class="skill-pill pill--blue">SSIS</span>
+                            <span class="skill-pill pill--purple">Azure Database</span>
+                            <span class="skill-pill pill--teal">Dynamics 365</span>
+                            <span class="skill-pill pill--orange">Power Platform</span>
+                            <span class="skill-pill pill--green">Python</span>
+                            <span class="skill-pill pill--cyan">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category reveal delay-4">
+                        <h4 class="skill-cat-title">Domains</h4>
+                        <div class="skill-pills">
+                            <span class="skill-pill pill--teal">Data Migration</span>
+                            <span class="skill-pill pill--blue">Cloud Infrastructure</span>
+                            <span class="skill-pill pill--purple">Enterprise Apps</span>
+                            <span class="skill-pill pill--rose">Healthcare IT</span>
+                            <span class="skill-pill pill--green">Algorithmic Trading</span>
+                            <span class="skill-pill pill--amber">Software Consulting</span>
+                        </div>
                     </div>
                 </div>
-                <div class="project-info">
-                    <span class="project-tag">Python · Alpaca API · In Progress</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PERSONAL PROJECTS ─── -->
+    <section class="s-personal" id="personal">
+        <div class="section-eyebrow reveal-left">PERSONAL PROJECTS</div>
+
+        <div class="personal-grid">
+
+            <article class="p-card reveal delay-1">
+                <div class="p-card-visual p-card-visual--bot">
+                    <svg viewBox="0 0 300 170" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <defs>
+                            <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                            </linearGradient>
+                            <filter id="greenGlow">
+                                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Grid lines -->
+                        <line x1="0" y1="40" x2="300" y2="40" stroke="#14532d" stroke-width="0.5"/>
+                        <line x1="0" y1="80" x2="300" y2="80" stroke="#14532d" stroke-width="0.5"/>
+                        <line x1="0" y1="120" x2="300" y2="120" stroke="#14532d" stroke-width="0.5"/>
+
+                        <!-- Up candles (green) -->
+                        <line x1="30" y1="22" x2="30" y2="90" stroke="#22c55e" stroke-width="1.2"/>
+                        <rect x="23" y="48" width="14" height="30" fill="#22c55e" opacity="0.85"/>
+                        <line x1="90" y1="18" x2="90" y2="75" stroke="#22c55e" stroke-width="1.2"/>
+                        <rect x="83" y="36" width="14" height="26" fill="#22c55e" opacity="0.85"/>
+                        <line x1="180" y1="15" x2="180" y2="70" stroke="#22c55e" stroke-width="1.2"/>
+                        <rect x="173" y="28" width="14" height="28" fill="#22c55e" opacity="0.85"/>
+                        <line x1="240" y1="12" x2="240" y2="60" stroke="#22c55e" stroke-width="1.2"/>
+                        <rect x="233" y="22" width="14" height="25" fill="#22c55e" opacity="0.85"/>
+                        <line x1="270" y1="10" x2="270" y2="55" stroke="#22c55e" stroke-width="1.2"/>
+                        <rect x="263" y="18" width="14" height="24" fill="#22c55e" opacity="0.85"/>
+
+                        <!-- Down candles (red) -->
+                        <line x1="60" y1="30" x2="60" y2="95" stroke="#ef4444" stroke-width="1.2"/>
+                        <rect x="53" y="52" width="14" height="28" fill="#ef4444" opacity="0.85"/>
+                        <line x1="150" y1="35" x2="150" y2="100" stroke="#ef4444" stroke-width="1.2"/>
+                        <rect x="143" y="55" width="14" height="28" fill="#ef4444" opacity="0.85"/>
+                        <line x1="210" y1="22" x2="210" y2="72" stroke="#ef4444" stroke-width="1.2"/>
+                        <rect x="203" y="38" width="14" height="22" fill="#ef4444" opacity="0.85"/>
+
+                        <!-- Area fill -->
+                        <path d="M 30 63 L 60 66 L 90 49 L 150 69 L 180 42 L 210 49 L 240 34 L 270 30 L 270 140 L 30 140 Z" fill="url(#greenGrad)"/>
+
+                        <!-- Trend line -->
+                        <polyline points="30,63 60,66 90,49 150,69 180,42 210,49 240,34 270,30" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round" filter="url(#greenGlow)"/>
+
+                        <!-- Buy signal -->
+                        <polygon points="90,85 96,100 84,100" fill="#22c55e" opacity="0.9"/>
+                        <text x="78" y="115" font-family="JetBrains Mono" font-size="8" fill="#22c55e" opacity="0.7">BUY</text>
+
+                        <!-- X-axis -->
+                        <line x1="0" y1="140" x2="300" y2="140" stroke="#1a2e1a" stroke-width="1"/>
+                        <text x="10" y="156" font-family="JetBrains Mono" font-size="7" fill="#4b7c58">MON</text>
+                        <text x="80" y="156" font-family="JetBrains Mono" font-size="7" fill="#4b7c58">WED</text>
+                        <text x="155" y="156" font-family="JetBrains Mono" font-size="7" fill="#4b7c58">THU</text>
+                        <text x="225" y="156" font-family="JetBrains Mono" font-size="7" fill="#4b7c58">FRI</text>
+                    </svg>
+                </div>
+                <div class="p-card-info">
+                    <div class="p-card-tags">
+                        <span class="tag tag--green">Python</span>
+                        <span class="tag tag--emerald">Alpaca API</span>
+                        <span class="tag tag--yellow">In Progress</span>
+                    </div>
                     <h3>Autonomous Day Trading Bot</h3>
                     <p>Algorithmic trading system with automated signal detection, position sizing, and risk management. Built with Python using live market data from Alpaca.</p>
                 </div>
             </article>
 
-            <article class="project-card project-card--locked reveal">
-                <div class="project-img">
-                    <div class="project-img-inner project-img-soon">
-                        <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:110px;">
-                            <rect x="55" y="48" width="50" height="38" rx="4" stroke="#bbb" stroke-width="1.5" fill="none"/>
-                            <path d="M68 48V38a12 12 0 0124 0v10" stroke="#bbb" stroke-width="1.5" fill="none"/>
-                            <circle cx="80" cy="67" r="5" fill="#bbb"/>
-                            <line x1="80" y1="72" x2="80" y2="78" stroke="#bbb" stroke-width="1.5"/>
-                        </svg>
-                    </div>
+            <article class="p-card p-card--locked reveal delay-2">
+                <div class="p-card-visual p-card-visual--soon">
+                    <svg viewBox="0 0 300 170" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect x="110" y="65" width="80" height="62" rx="6" stroke="#333" stroke-width="2" fill="none"/>
+                        <path d="M 127 65 V 50 a 23 23 0 0 1 46 0 V 65" stroke="#333" stroke-width="2" fill="none"/>
+                        <circle cx="150" cy="96" r="8" fill="#333"/>
+                        <line x1="150" y1="104" x2="150" y2="116" stroke="#333" stroke-width="2"/>
+                    </svg>
                 </div>
-                <div class="project-info">
-                    <span class="project-tag">Coming Soon</span>
+                <div class="p-card-info">
+                    <div class="p-card-tags">
+                        <span class="tag tag--slate">Coming Soon</span>
+                    </div>
                     <h3>??? — Under Wraps</h3>
                     <p>Something new is in the works. Stay tuned.</p>
                 </div>
@@ -149,50 +305,20 @@
         </div>
     </section>
 
-    <!-- Skills / About -->
-    <section class="about-section" id="about">
-        <div class="about-inner">
-            <div class="about-left">
-                <p class="about-label">WHO I AM</p>
-                <h2 class="about-heading">Engineer.<br>Consultant.<br>Builder.</h2>
-            </div>
-            <div class="about-right">
-                <p>I'm a <strong>Computer Science graduate from Arizona State University</strong> (December 2024) and a Software Developer Consultant at <strong>Deloitte</strong>, where I work with the California Department of Public Health on their Genetic Disease Screening Program.</p>
-                <p>Currently helping deploy <strong>NBS 2.0</strong> — the biggest application in CDPH's history — primarily building SSIS and SSMS packages for data migration, alongside Power Platform bug fixes and Dynamics 365 support.</p>
-                <div class="skills-row">
-                    <div class="skill-group">
-                        <h4>Technologies</h4>
-                        <span>SSMS / SSIS</span>
-                        <span>Azure Database</span>
-                        <span>Dynamics 365</span>
-                        <span>Power Platform</span>
-                    </div>
-                    <div class="skill-group">
-                        <h4>Domains</h4>
-                        <span>Data Migration</span>
-                        <span>Cloud Infrastructure</span>
-                        <span>Enterprise Apps</span>
-                        <span>Healthcare IT</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact-section" id="contact">
-        <p class="contact-label">GET IN TOUCH</p>
-        <h2 class="contact-heading">Let's work<br><em>together.</em></h2>
-        <a href="mailto:hello@saatvikrao.com" class="contact-btn">Say Hello</a>
+    <!-- ─── CONTACT ─── -->
+    <section class="s-contact" id="contact">
+        <p class="contact-label reveal">GET IN TOUCH</p>
+        <div class="contact-line reveal delay-1"></div>
+        <h2 class="contact-heading reveal delay-2">Let's work<br><em>together.</em></h2>
+        <a href="mailto:hello@saatvikrao.com" class="contact-btn reveal delay-3">Say Hello</a>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <span>© 2026 Saatvik Rao</span>
         <div class="footer-social">
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Twitter</a>
+            <a href="https://github.com/Saatvikrao7" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/saatvik-rao" target="_blank">LinkedIn</a>
         </div>
     </footer>
 
