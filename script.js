@@ -51,29 +51,45 @@ const heroBg    = document.querySelector('.hero-grid');
 const heroMeta  = document.getElementById('hero-meta');
 const heroFoot  = document.getElementById('hero-foot');
 
+gsap.timeline({
+    scrollTrigger: {
+        trigger: '.zoom-bridge',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1,
+    }
+})
+.to(heroTitle, { scale: 14, opacity: 0, transformOrigin: 'center center', ease: 'none' }, 0)
+.to([heroMeta, heroFoot], { opacity: 0, ease: 'none' }, 0)
+.to(heroBg, { opacity: 0, ease: 'none' }, 0);
+
+
+/* ── Stat Counters ── */
+function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 1800;
+    const start = performance.now();
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
 ScrollTrigger.create({
-    trigger: '.zoom-bridge',
-    start: 'top bottom',
-    end: 'bottom top',
-    scrub: true,
-    onUpdate: (self) => {
-        const p = self.progress; // 0 → 1 as zoom-bridge scrolls through
-
-        // Scale the title from 1x up to ~8x as user scrolls
-        const scale = 1 + p * 10;
-        const opacity = 1 - p * 1.6;
-
-        gsap.set(heroTitle, {
-            scale,
-            opacity: Math.max(0, opacity),
-            transformOrigin: 'center center',
+    trigger: '.stats-strip',
+    start: 'top 80%',
+    once: true,
+    onEnter: () => {
+        document.querySelectorAll('.stat-num').forEach(el => animateCounter(el));
+        gsap.fromTo('.stat-item', { opacity: 0, y: 40 }, {
+            opacity: 1, y: 0,
+            duration: 0.9, ease: 'expo.out',
+            stagger: 0.1
         });
-
-        // Fade out footer and meta
-        gsap.set([heroMeta, heroFoot], { opacity: Math.max(0, 1 - p * 3) });
-
-        // Fade the grid
-        gsap.set(heroBg, { opacity: Math.max(0, 0.5 - p * 2) });
     }
 });
 
