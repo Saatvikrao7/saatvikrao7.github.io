@@ -5,127 +5,233 @@ const lenis = new Lenis({
     smoothWheel: true,
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
 
 
 /* ── Custom Cursor ── */
-const dot  = document.createElement('div');
-const ring = document.createElement('div');
-dot.className  = 'cursor-dot';
-ring.className = 'cursor-ring';
-document.body.append(dot, ring);
-
-let mx = 0, my = 0, rx = 0, ry = 0;
+const cursorDot  = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
 
 document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    dot.style.left  = mx + 'px';
-    dot.style.top   = my + 'px';
+    cursorDot.style.left = mx + 'px';
+    cursorDot.style.top  = my + 'px';
 });
 
-(function trackRing() {
+(function animRing() {
     rx += (mx - rx) * 0.1;
     ry += (my - ry) * 0.1;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(trackRing);
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
 })();
 
-document.querySelectorAll('a, button, .stack-pill, .contact-cta, .nav-logo').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
 });
 
 
-/* ── Hero Title Animate In ── */
+/* ── Hero Load Animation ── */
 window.addEventListener('load', () => {
-    document.querySelectorAll('.hero-title .line').forEach((line, li) => {
-        const text = line.textContent;
-        line.innerHTML = '';
-        line.style.opacity = '1';
-        [...text].forEach((ch, i) => {
-            const s = document.createElement('span');
-            s.style.cssText = `display:inline-block;opacity:0;transform:translateY(60px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${(li * 8 + i) * 45 + 200}ms, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${(li * 8 + i) * 45 + 200}ms`;
-            s.textContent = ch === ' ' ? '\u00A0' : ch;
-            line.appendChild(s);
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    s.style.opacity = '1';
-                    s.style.transform = 'translateY(0)';
-                }, 50);
-            });
-        });
-    });
+    // Animate lines in
+    gsap.fromTo('#ht1', { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out', delay: 0.2 });
+    gsap.fromTo('#ht2', { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out', delay: 0.42 });
+    gsap.fromTo('#hero-meta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', delay: 0.7 });
+    gsap.fromTo('#hero-foot', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', delay: 0.9 });
 });
 
 
-/* ── Sticky Work Section ── */
-const stickyWrap  = document.getElementById('work');
-const panels = [
-    document.getElementById('panel-intro'),
-    document.getElementById('panel-what'),
-    document.getElementById('panel-stack'),
+/* ── Hero Title — Zoom on Scroll (main effect) ── */
+const heroTitle = document.getElementById('hero-title');
+const heroBg    = document.querySelector('.hero-grid');
+const heroMeta  = document.getElementById('hero-meta');
+const heroFoot  = document.getElementById('hero-foot');
+
+ScrollTrigger.create({
+    trigger: '.zoom-bridge',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: true,
+    onUpdate: (self) => {
+        const p = self.progress; // 0 → 1 as zoom-bridge scrolls through
+
+        // Scale the title from 1x up to ~8x as user scrolls
+        const scale = 1 + p * 10;
+        const opacity = 1 - p * 1.6;
+
+        gsap.set(heroTitle, {
+            scale,
+            opacity: Math.max(0, opacity),
+            transformOrigin: 'center center',
+        });
+
+        // Fade out footer and meta
+        gsap.set([heroMeta, heroFoot], { opacity: Math.max(0, 1 - p * 3) });
+
+        // Fade the grid
+        gsap.set(heroBg, { opacity: Math.max(0, 0.5 - p * 2) });
+    }
+});
+
+
+/* ── Work Section — Sticky Panel Switcher ── */
+const workPanels = [
+    document.getElementById('wp-1'),
+    document.getElementById('wp-2'),
+    document.getElementById('wp-3'),
 ];
 
-let currentPanel = 0;
+let activePanelIdx = 0;
 
-function showPanel(index) {
-    panels.forEach((p, i) => {
-        p.classList.remove('hidden', 'exit');
-        if (i < index) p.classList.add('exit');
-        else if (i > index) p.classList.add('hidden');
-    });
-    currentPanel = index;
+function switchPanel(idx) {
+    if (idx === activePanelIdx) return;
+    const prev = workPanels[activePanelIdx];
+    const next = workPanels[idx];
+
+    // Exit current
+    prev.classList.remove('active');
+    prev.classList.add('exit-up');
+
+    // Enter next
+    next.classList.remove('exit-up');
+    setTimeout(() => {
+        next.classList.add('active');
+    }, 50);
+
+    activePanelIdx = idx;
 }
 
-lenis.on('scroll', ({ scroll }) => {
-    if (!stickyWrap) return;
-    const rect = stickyWrap.getBoundingClientRect();
-    const wrapTop    = stickyWrap.offsetTop;
-    const wrapHeight = stickyWrap.offsetHeight;
-    const vh         = window.innerHeight;
-
-    // scroll progress through the sticky section (0 to 1)
-    const progress = (scroll - wrapTop) / (wrapHeight - vh);
-
-    if (progress < 0 || progress > 1) return;
-
-    if (progress < 0.33) showPanel(0);
-    else if (progress < 0.66) showPanel(1);
-    else showPanel(2);
+ScrollTrigger.create({
+    trigger: '.work-sticky-wrap',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: false,
+    onUpdate: (self) => {
+        const p = self.progress;
+        if (p < 0.33) switchPanel(0);
+        else if (p < 0.66) switchPanel(1);
+        else switchPanel(2);
+    }
 });
 
 
-/* ── Nav: scrolled state ── */
-const nav = document.getElementById('nav');
-lenis.on('scroll', ({ scroll }) => {
-    nav.classList.toggle('scrolled', scroll > 80);
+/* ── About — Split Title Lines ── */
+const aboutTitleSpans = document.querySelectorAll('.split-lines span');
+aboutTitleSpans.forEach((span, i) => {
+    gsap.fromTo(span,
+        { yPercent: 105, opacity: 0 },
+        {
+            yPercent: 0, opacity: 1,
+            duration: 1.1, ease: 'expo.out',
+            delay: i * 0.12,
+            scrollTrigger: {
+                trigger: '.about-title',
+                start: 'top 80%',
+            }
+        }
+    );
 });
 
 
-/* ── General Reveal on Scroll ── */
-const revealEls = document.querySelectorAll(
-    '.about-inner, .about-heading, .about-right p, .skill-groups, .projects-header, .proj-card, .contact-inner, .section-label'
+/* ── Skill Bars ── */
+const skillFills = document.querySelectorAll('.skill-fill');
+
+ScrollTrigger.create({
+    trigger: '.skill-block',
+    start: 'top 75%',
+    onEnter: () => {
+        skillFills.forEach((fill, i) => {
+            setTimeout(() => fill.classList.add('animated'), i * 120);
+        });
+    },
+    once: true
+});
+
+
+/* ── Project Cards ── */
+document.querySelectorAll('.proj-card').forEach((card, i) => {
+    gsap.fromTo(card,
+        { opacity: 0, y: 60 },
+        {
+            opacity: 1, y: 0,
+            duration: 1, ease: 'expo.out',
+            delay: i * 0.15,
+            scrollTrigger: {
+                trigger: '.proj-grid',
+                start: 'top 80%',
+            }
+        }
+    );
+});
+
+
+/* ── Contact Title Lines ── */
+const contactSpans = document.querySelectorAll('.contact-title span');
+contactSpans.forEach((span, i) => {
+    gsap.fromTo(span,
+        { yPercent: 110 },
+        {
+            yPercent: 0,
+            duration: 1.1, ease: 'expo.out',
+            delay: i * 0.13,
+            scrollTrigger: {
+                trigger: '.contact-title',
+                start: 'top 80%',
+            }
+        }
+    );
+});
+
+gsap.fromTo('.cta-btn',
+    { opacity: 0, y: 30 },
+    {
+        opacity: 1, y: 0,
+        duration: 0.9, ease: 'expo.out', delay: 0.45,
+        scrollTrigger: { trigger: '.cta-btn', start: 'top 90%' }
+    }
 );
 
-revealEls.forEach(el => el.classList.add('reveal-on-scroll'));
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+/* ── About cols ── */
+gsap.fromTo('.about-col--left',
+    { opacity: 0, x: -50 },
+    {
+        opacity: 1, x: 0,
+        duration: 1, ease: 'expo.out',
+        scrollTrigger: { trigger: '.about-cols', start: 'top 75%' }
+    }
+);
+
+gsap.fromTo('.about-col--right',
+    { opacity: 0, x: 50 },
+    {
+        opacity: 1, x: 0, delay: 0.15,
+        duration: 1, ease: 'expo.out',
+        scrollTrigger: { trigger: '.about-cols', start: 'top 75%' }
+    }
+);
+
+
+/* ── Nav solid on scroll ── */
+const nav = document.getElementById('nav');
+ScrollTrigger.create({
+    start: 'top -80',
+    onUpdate: (self) => {
+        nav.classList.toggle('solid', self.scroll() > 80);
+    }
+});
+
+
+/* ── General kicker/label reveals ── */
+document.querySelectorAll('.about-kicker, .proj-header .kicker, .contact-inner .kicker').forEach(el => {
+    gsap.fromTo(el,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
         }
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-
-revealEls.forEach(el => observer.observe(el));
-
-// Stagger proj cards
-document.querySelectorAll('.proj-card').forEach((card, i) => {
-    card.style.transitionDelay = `${i * 0.12}s`;
+    );
 });

@@ -5,148 +5,321 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saatvik Rao</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
     <!-- Nav -->
     <header class="nav" id="nav">
-        <a href="#hero" class="nav-logo">SR</a>
+        <a href="#" class="nav-logo">SR</a>
         <nav class="nav-links">
             <a href="#work">work</a>
-            <a href="#skills">about</a>
+            <a href="#about">about</a>
             <a href="#projects">projects</a>
             <a href="#contact">contact</a>
         </nav>
-        <div class="nav-right">
-            <a href="https://www.linkedin.com/in/saatvik-rao" target="_blank" class="nav-icon" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        <div class="nav-social">
+            <a href="https://www.linkedin.com/in/saatvik-rao" target="_blank" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
             </a>
-            <a href="https://github.com/Saatvikrao7" target="_blank" class="nav-icon" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            <a href="https://github.com/Saatvikrao7" target="_blank" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
             </a>
         </div>
     </header>
 
-    <!-- ── HERO ── -->
+    <!-- ══ HERO ══ -->
     <section class="hero" id="hero">
-        <div class="hero-bg-grid"></div>
-        <div class="hero-inner">
-            <div class="hero-label">
-                <span class="dot"></span>
-                Software Developer Consultant · Deloitte
-            </div>
-            <h1 class="hero-title">
-                <span class="line" data-splitting>Saatvik</span>
-                <span class="line line--indent" data-splitting>Rao</span>
-            </h1>
-            <div class="hero-bottom">
-                <p class="hero-desc">CS grad from Arizona State<br>who builds things that matter.</p>
-                <div class="hero-photo">
-                    <div class="photo-inner">
-                        <span>Your Photo</span>
-                    </div>
-                </div>
-                <div class="hero-role">
-                    <p class="role-line">developer_</p>
-                    <p class="role-line role-line--dim">&lt;consultant&gt;</p>
-                </div>
+        <div class="hero-grid"></div>
+
+        <!-- Top meta row -->
+        <div class="hero-meta" id="hero-meta">
+            <span class="hero-tag"><span class="blink-dot"></span> Available for work</span>
+            <span class="hero-tag">Software Developer Consultant</span>
+            <span class="hero-tag">Deloitte · CDPH</span>
+        </div>
+
+        <!-- The big name — this zooms on scroll -->
+        <div class="hero-title-wrap" id="hero-title-wrap">
+            <div class="hero-title" id="hero-title">
+                <span class="ht-line" id="ht1">Saatvik</span>
+                <span class="ht-line ht-accent" id="ht2">Rao</span>
             </div>
         </div>
-        <div class="hero-scroll-cue">
-            <span>scroll</span>
-            <div class="scroll-track"><div class="scroll-thumb"></div></div>
+
+        <!-- Bottom row -->
+        <div class="hero-foot" id="hero-foot">
+            <div class="hero-foot-left">
+                <p>CS grad · Arizona State</p>
+                <p class="hero-foot-dim">December 2024</p>
+            </div>
+            <div class="hero-photo-wrap" id="hero-photo">
+                <div class="hero-photo-inner">
+                    <span>Your<br>Photo</span>
+                </div>
+                <div class="hero-photo-label">Saatvik Rao</div>
+            </div>
+            <div class="hero-foot-right">
+                <p class="mono-sm">developer_</p>
+                <p class="mono-sm dim">&lt;consultant&gt;</p>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <span>scroll to explore</span>
+            <div class="scroll-bar"><div class="scroll-fill"></div></div>
         </div>
     </section>
 
-    <!-- ── WORK (sticky scroll) ── -->
-    <div class="sticky-wrap" id="work">
-        <div class="sticky-scene">
+    <!-- ══ ZOOM BRIDGE — name scales into here ══ -->
+    <div class="zoom-bridge" id="zoom-bridge"></div>
 
-            <!-- Panel 1: Project intro -->
-            <div class="sticky-panel" id="panel-intro">
-                <div class="panel-label">01 — WORK</div>
-                <h2 class="panel-title">
-                    <em>NBS 2.0</em><br>Newborn Screening<br>Application
-                </h2>
-                <p class="panel-sub">California Department of Public Health · Deloitte</p>
-            </div>
+    <!-- ══ WORK ══ -->
+    <section class="work-section" id="work">
 
-            <!-- Panel 2: What I did -->
-            <div class="sticky-panel hidden" id="panel-what">
-                <div class="panel-label">01 — WORK · ROLE</div>
-                <div class="panel-split">
-                    <h2 class="panel-title-sm">What I built</h2>
-                    <div class="panel-bullets">
-                        <div class="bullet-item">
-                            <span class="bullet-num">—</span>
-                            <p>Designed and built <strong>SSIS packages and SSMS workflows</strong> to migrate years of sensitive health records with zero data loss</p>
+        <!-- Large background project label -->
+        <div class="work-bg-label" aria-hidden="true">NBS 2.0</div>
+
+        <!-- Sticky container: 3 panels scroll through -->
+        <div class="work-sticky-wrap">
+            <div class="work-sticky" id="work-sticky">
+
+                <div class="work-panel active" id="wp-1">
+                    <div class="wp-meta">
+                        <span class="wp-num">01</span>
+                        <span class="wp-cat">WORK — PROJECT</span>
+                    </div>
+                    <div class="wp-body">
+                        <div class="wp-text">
+                            <h2 class="wp-title">California's<br>largest newborn<br><em>screening app.</em></h2>
+                            <p class="wp-sub">Deployed for the California Department of Public Health — the biggest application in CDPH's history.</p>
                         </div>
-                        <div class="bullet-item">
-                            <span class="bullet-num">—</span>
-                            <p>Diagnosed and resolved bugs across <strong>Power Platform and Dynamics 365</strong>, keeping critical workflows running</p>
-                        </div>
-                        <div class="bullet-item">
-                            <span class="bullet-num">—</span>
-                            <p>Collaborated directly with <strong>client stakeholders</strong> to troubleshoot database and migration issues</p>
+                        <div class="wp-visual" id="wpv-1">
+                            <!-- Stylized NBS 2.0 data viz -->
+                            <svg viewBox="0 0 480 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="work-svg">
+                                <defs>
+                                    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stop-color="#c8f542" stop-opacity="0.2"/>
+                                        <stop offset="100%" stop-color="#c8f542" stop-opacity="1"/>
+                                    </linearGradient>
+                                    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                </defs>
+                                <!-- Background panel -->
+                                <rect x="1" y="1" width="478" height="338" rx="8" stroke="rgba(200,245,66,0.15)" stroke-width="1" fill="rgba(200,245,66,0.02)"/>
+                                <!-- DNA Helix (simplified) -->
+                                <path d="M 60 30 Q 120 80 60 130 Q 0 180 60 230 Q 120 280 60 330" stroke="rgba(200,245,66,0.3)" stroke-width="1.5" fill="none"/>
+                                <path d="M 100 30 Q 40 80 100 130 Q 160 180 100 230 Q 40 280 100 330" stroke="rgba(200,245,66,0.3)" stroke-width="1.5" fill="none"/>
+                                <!-- Rungs -->
+                                <line x1="60" y1="80" x2="100" y2="80" stroke="rgba(200,245,66,0.5)" stroke-width="1"/>
+                                <line x1="60" y1="110" x2="100" y2="110" stroke="rgba(200,245,66,0.5)" stroke-width="1"/>
+                                <line x1="60" y1="180" x2="100" y2="180" stroke="rgba(200,245,66,0.5)" stroke-width="1"/>
+                                <line x1="60" y1="210" x2="100" y2="210" stroke="rgba(200,245,66,0.5)" stroke-width="1"/>
+                                <line x1="60" y1="280" x2="100" y2="280" stroke="rgba(200,245,66,0.5)" stroke-width="1"/>
+                                <!-- Data flow lines -->
+                                <line x1="130" y1="60" x2="200" y2="60" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <line x1="130" y1="170" x2="200" y2="170" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <line x1="130" y1="280" x2="200" y2="280" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <!-- Nodes -->
+                                <circle cx="200" cy="60" r="6" stroke="#c8f542" stroke-width="1.5" fill="rgba(200,245,66,0.1)"/>
+                                <circle cx="200" cy="170" r="6" stroke="#c8f542" stroke-width="1.5" fill="rgba(200,245,66,0.1)"/>
+                                <circle cx="200" cy="280" r="6" stroke="#c8f542" stroke-width="1.5" fill="rgba(200,245,66,0.1)"/>
+                                <!-- Node labels -->
+                                <text x="215" y="64" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.6)">GENETIC_SCREENING</text>
+                                <text x="215" y="174" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.6)">DATA_MIGRATION</text>
+                                <text x="215" y="284" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.6)">CDPH_DEPLOY</text>
+                                <!-- Connecting lines -->
+                                <line x1="200" y1="66" x2="200" y2="164" stroke="rgba(200,245,66,0.15)" stroke-width="1"/>
+                                <line x1="200" y1="176" x2="200" y2="274" stroke="rgba(200,245,66,0.15)" stroke-width="1"/>
+                                <!-- Right side chart -->
+                                <rect x="340" y="40" width="120" height="80" rx="4" stroke="rgba(200,245,66,0.1)" fill="rgba(200,245,66,0.03)"/>
+                                <polyline points="350,100 365,80 380,88 395,65 410,70 425,50 440,55" stroke="#c8f542" stroke-width="1.5" fill="none" filter="url(#glow)"/>
+                                <text x="340" y="35" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">DEPLOYMENT PROGRESS</text>
+                                <rect x="340" y="150" width="120" height="80" rx="4" stroke="rgba(200,245,66,0.1)" fill="rgba(200,245,66,0.03)"/>
+                                <rect x="352" y="185" width="14" height="35" fill="rgba(200,245,66,0.4)" rx="1"/>
+                                <rect x="372" y="170" width="14" height="50" fill="rgba(200,245,66,0.6)" rx="1"/>
+                                <rect x="392" y="178" width="14" height="42" fill="rgba(200,245,66,0.5)" rx="1"/>
+                                <rect x="412" y="160" width="14" height="60" fill="#c8f542" rx="1"/>
+                                <text x="340" y="145" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">RECORDS MIGRATED</text>
+                                <!-- Status indicators -->
+                                <circle cx="350" cy="280" r="4" fill="#c8f542" opacity="0.9"/>
+                                <text x="362" y="284" font-family="JetBrains Mono" font-size="9" fill="rgba(240,237,232,0.5)">LIVE IN PRODUCTION</text>
+                                <circle cx="350" cy="305" r="4" fill="rgba(200,245,66,0.4)"/>
+                                <text x="362" y="309" font-family="JetBrains Mono" font-size="9" fill="rgba(240,237,232,0.3)">CALIFORNIA STATEWIDE</text>
+                            </svg>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Panel 3: Stack -->
-            <div class="sticky-panel hidden" id="panel-stack">
-                <div class="panel-label">01 — WORK · STACK</div>
-                <h2 class="panel-title-sm">Technologies</h2>
-                <div class="stack-grid">
-                    <div class="stack-pill">SSIS</div>
-                    <div class="stack-pill">SSMS</div>
-                    <div class="stack-pill">Azure</div>
-                    <div class="stack-pill">Dynamics 365</div>
-                    <div class="stack-pill">Power Platform</div>
-                    <div class="stack-pill">SQL</div>
-                    <div class="stack-pill">Data Migration</div>
-                    <div class="stack-pill">Healthcare IT</div>
+                <div class="work-panel" id="wp-2">
+                    <div class="wp-meta">
+                        <span class="wp-num">01</span>
+                        <span class="wp-cat">WORK — ROLE</span>
+                    </div>
+                    <div class="wp-body">
+                        <div class="wp-text">
+                            <h2 class="wp-title">Data migration<br>at <em>scale.</em></h2>
+                            <div class="wp-bullets">
+                                <div class="wp-bullet">
+                                    <span class="wp-bullet-icon">—</span>
+                                    <p>Built <strong>SSIS packages & SSMS workflows</strong> to migrate sensitive health records with zero data loss</p>
+                                </div>
+                                <div class="wp-bullet">
+                                    <span class="wp-bullet-icon">—</span>
+                                    <p>Resolved bugs across <strong>Power Platform & Dynamics 365</strong> keeping critical screening workflows live</p>
+                                </div>
+                                <div class="wp-bullet">
+                                    <span class="wp-bullet-icon">—</span>
+                                    <p>Collaborated with <strong>CDPH stakeholders</strong> to troubleshoot database and migration blockers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wp-visual" id="wpv-2">
+                            <!-- Data pipeline visual -->
+                            <svg viewBox="0 0 480 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="work-svg">
+                                <rect x="1" y="1" width="478" height="338" rx="8" stroke="rgba(200,245,66,0.15)" stroke-width="1" fill="rgba(200,245,66,0.02)"/>
+                                <!-- Pipeline visualization -->
+                                <text x="20" y="35" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.5)" letter-spacing="2">DATA PIPELINE — SSIS PACKAGES</text>
+                                <!-- Source DB -->
+                                <rect x="20" y="60" width="100" height="70" rx="4" stroke="rgba(200,245,66,0.3)" fill="rgba(200,245,66,0.04)"/>
+                                <text x="35" y="82" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.7)">SOURCE</text>
+                                <text x="35" y="97" font-family="JetBrains Mono" font-size="10" fill="#c8f542">Legacy DB</text>
+                                <text x="35" y="118" font-family="JetBrains Mono" font-size="7" fill="rgba(200,245,66,0.4)">SSMS 2019</text>
+                                <!-- Arrow 1 -->
+                                <path d="M 120 95 L 165 95" stroke="#c8f542" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <polygon points="165,91 175,95 165,99" fill="#c8f542"/>
+                                <!-- SSIS Transform -->
+                                <rect x="175" y="60" width="110" height="70" rx="4" stroke="rgba(200,245,66,0.5)" fill="rgba(200,245,66,0.07)"/>
+                                <text x="190" y="82" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.7)">TRANSFORM</text>
+                                <text x="190" y="97" font-family="JetBrains Mono" font-size="10" fill="#c8f542">SSIS Pkg</text>
+                                <text x="190" y="118" font-family="JetBrains Mono" font-size="7" fill="rgba(200,245,66,0.4)">ETL PROCESS</text>
+                                <!-- Arrow 2 -->
+                                <path d="M 285 95 L 330 95" stroke="#c8f542" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <polygon points="330,91 340,95 330,99" fill="#c8f542"/>
+                                <!-- Target DB -->
+                                <rect x="340" y="60" width="120" height="70" rx="4" stroke="rgba(200,245,66,0.3)" fill="rgba(200,245,66,0.04)"/>
+                                <text x="355" y="82" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.7)">TARGET</text>
+                                <text x="355" y="97" font-family="JetBrains Mono" font-size="10" fill="#c8f542">NBS 2.0</text>
+                                <text x="355" y="118" font-family="JetBrains Mono" font-size="7" fill="rgba(200,245,66,0.4)">AZURE SQL</text>
+                                <!-- Stats row -->
+                                <line x1="20" y1="155" x2="460" y2="155" stroke="rgba(200,245,66,0.08)" stroke-width="1"/>
+                                <rect x="20" y="170" width="130" height="70" rx="4" stroke="rgba(200,245,66,0.1)" fill="none"/>
+                                <text x="35" y="192" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">RECORDS</text>
+                                <text x="35" y="216" font-family="JetBrains Mono" font-size="22" fill="#c8f542">0</text>
+                                <text x="35" y="232" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">DATA LOSS</text>
+                                <rect x="175" y="170" width="130" height="70" rx="4" stroke="rgba(200,245,66,0.1)" fill="none"/>
+                                <text x="190" y="192" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">PLATFORM</text>
+                                <text x="190" y="210" font-family="JetBrains Mono" font-size="11" fill="#c8f542">Dynamics</text>
+                                <text x="190" y="228" font-family="JetBrains Mono" font-size="11" fill="#c8f542">365</text>
+                                <rect x="330" y="170" width="130" height="70" rx="4" stroke="rgba(200,245,66,0.1)" fill="none"/>
+                                <text x="345" y="192" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">CLOUD</text>
+                                <text x="345" y="216" font-family="JetBrains Mono" font-size="22" fill="#c8f542">Azure</text>
+                                <!-- Progress bar -->
+                                <rect x="20" y="270" width="440" height="6" rx="3" fill="rgba(200,245,66,0.1)"/>
+                                <rect x="20" y="270" width="380" height="6" rx="3" fill="#c8f542"/>
+                                <text x="20" y="295" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">MIGRATION PROGRESS</text>
+                                <text x="420" y="295" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.6)">87%</text>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="work-panel" id="wp-3">
+                    <div class="wp-meta">
+                        <span class="wp-num">01</span>
+                        <span class="wp-cat">WORK — STACK</span>
+                    </div>
+                    <div class="wp-body">
+                        <div class="wp-text">
+                            <h2 class="wp-title">Built with<br>enterprise<br><em>tools.</em></h2>
+                            <div class="wp-stack">
+                                <div class="stack-item"><span class="stack-num">01</span><span class="stack-name">SSIS / SSMS</span></div>
+                                <div class="stack-item"><span class="stack-num">02</span><span class="stack-name">Azure Database</span></div>
+                                <div class="stack-item"><span class="stack-num">03</span><span class="stack-name">Dynamics 365</span></div>
+                                <div class="stack-item"><span class="stack-num">04</span><span class="stack-name">Power Platform</span></div>
+                                <div class="stack-item"><span class="stack-num">05</span><span class="stack-name">SQL Server</span></div>
+                            </div>
+                        </div>
+                        <div class="wp-visual" id="wpv-3">
+                            <!-- Architecture diagram -->
+                            <svg viewBox="0 0 480 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="work-svg">
+                                <rect x="1" y="1" width="478" height="338" rx="8" stroke="rgba(200,245,66,0.15)" stroke-width="1" fill="rgba(200,245,66,0.02)"/>
+                                <text x="20" y="35" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.5)" letter-spacing="2">ARCHITECTURE OVERVIEW</text>
+                                <!-- Cloud layer -->
+                                <rect x="160" y="55" width="160" height="50" rx="6" stroke="#c8f542" stroke-width="1.5" fill="rgba(200,245,66,0.05)"/>
+                                <text x="200" y="76" font-family="JetBrains Mono" font-size="9" fill="#c8f542">Microsoft</text>
+                                <text x="200" y="91" font-family="JetBrains Mono" font-size="9" fill="#c8f542">Azure</text>
+                                <!-- Left box -->
+                                <rect x="20" y="150" width="130" height="50" rx="4" stroke="rgba(200,245,66,0.4)" fill="rgba(200,245,66,0.03)"/>
+                                <text x="40" y="171" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">Dynamics</text>
+                                <text x="40" y="186" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">365</text>
+                                <!-- Center box -->
+                                <rect x="175" y="150" width="130" height="50" rx="4" stroke="rgba(200,245,66,0.4)" fill="rgba(200,245,66,0.03)"/>
+                                <text x="210" y="171" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">SSIS</text>
+                                <text x="195" y="186" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">Packages</text>
+                                <!-- Right box -->
+                                <rect x="330" y="150" width="130" height="50" rx="4" stroke="rgba(200,245,66,0.4)" fill="rgba(200,245,66,0.03)"/>
+                                <text x="350" y="171" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">Power</text>
+                                <text x="350" y="186" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">Platform</text>
+                                <!-- Bottom box -->
+                                <rect x="160" y="250" width="160" height="50" rx="4" stroke="rgba(200,245,66,0.4)" fill="rgba(200,245,66,0.03)"/>
+                                <text x="180" y="271" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">NBS 2.0</text>
+                                <text x="180" y="286" font-family="JetBrains Mono" font-size="9" fill="rgba(200,245,66,0.7)">Application</text>
+                                <!-- Connecting lines -->
+                                <line x1="240" y1="105" x2="85" y2="150" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+                                <line x1="240" y1="105" x2="240" y2="150" stroke="rgba(200,245,66,0.35)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                <line x1="240" y1="105" x2="395" y2="150" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+                                <line x1="85" y1="200" x2="240" y2="250" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+                                <line x1="240" y1="200" x2="240" y2="250" stroke="rgba(200,245,66,0.35)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                <line x1="395" y1="200" x2="240" y2="250" stroke="rgba(200,245,66,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
         </div>
-    </div>
+    </section>
 
-    <!-- ── ABOUT / SKILLS ── -->
-    <section class="about-section" id="skills">
+    <!-- ══ ABOUT ══ -->
+    <section class="about-section" id="about">
         <div class="about-inner">
-            <div class="about-left">
-                <div class="about-label">02 — ABOUT</div>
-                <h2 class="about-heading">
-                    Engineer.<br>
-                    <span class="accent">Consultant.</span><br>
-                    Builder.
-                </h2>
-            </div>
-            <div class="about-right">
-                <p>I'm a <strong>Computer Science graduate from Arizona State University</strong> (December 2024), currently working as a Software Developer Consultant at <strong>Deloitte</strong> on the California Department of Public Health's Genetic Disease Screening Program.</p>
-                <p>I'm helping deploy <strong>NBS 2.0</strong> — the largest application in CDPH's history — focused on data migration, enterprise platform support, and client collaboration.</p>
-                <div class="skill-groups">
-                    <div class="skill-group">
-                        <h4>Stack</h4>
-                        <div class="skill-tags">
-                            <span>SSMS / SSIS</span>
-                            <span>Azure</span>
-                            <span>Dynamics 365</span>
-                            <span>Power Platform</span>
-                            <span>Python</span>
-                            <span>SQL</span>
+            <div class="about-kicker">02 — ABOUT</div>
+            <h2 class="about-title split-lines">
+                <span>Engineer.</span>
+                <span class="accent">Consultant.</span>
+                <span>Builder.</span>
+            </h2>
+            <div class="about-cols">
+                <div class="about-col about-col--left">
+                    <p>I'm a <strong>Computer Science graduate from Arizona State University</strong> (December 2024) and a Software Developer Consultant at <strong>Deloitte</strong>, where I work with the California Department of Public Health on their Genetic Disease Screening Program.</p>
+                    <p>Currently deploying <strong>NBS 2.0</strong> — the biggest application in CDPH's history — focused on data migration, enterprise support, and direct client collaboration.</p>
+                </div>
+                <div class="about-col about-col--right">
+                    <div class="skill-block">
+                        <div class="skill-row">
+                            <span class="skill-label">SSIS / SSMS</span>
+                            <div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div>
                         </div>
-                    </div>
-                    <div class="skill-group">
-                        <h4>Domain</h4>
-                        <div class="skill-tags">
-                            <span>Data Migration</span>
-                            <span>Cloud Infrastructure</span>
-                            <span>Enterprise Apps</span>
-                            <span>Healthcare IT</span>
+                        <div class="skill-row">
+                            <span class="skill-label">Azure / Dynamics 365</span>
+                            <div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-label">Power Platform</span>
+                            <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-label">Python / SQL</span>
+                            <div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-label">Data Migration</span>
+                            <div class="skill-bar"><div class="skill-fill" style="--w:88%"></div></div>
                         </div>
                     </div>
                 </div>
@@ -154,106 +327,132 @@
         </div>
     </section>
 
-    <!-- ── PERSONAL PROJECTS ── -->
-    <section class="projects-section" id="projects">
-        <div class="projects-header">
-            <span class="section-label">03 — PROJECTS</span>
-            <h2 class="projects-title">Personal<br><em>Work</em></h2>
+    <!-- ══ PROJECTS ══ -->
+    <section class="proj-section" id="projects">
+        <div class="proj-header">
+            <span class="kicker">03 — PERSONAL PROJECTS</span>
         </div>
-        <div class="projects-grid">
-            <article class="proj-card">
-                <div class="proj-visual">
-                    <svg viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                        <defs>
-                            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/>
-                                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
-                            </linearGradient>
-                        </defs>
-                        <line x1="0" y1="50" x2="360" y2="50" stroke="#1a2e1a" stroke-width="0.5"/>
-                        <line x1="0" y1="100" x2="360" y2="100" stroke="#1a2e1a" stroke-width="0.5"/>
-                        <line x1="0" y1="150" x2="360" y2="150" stroke="#1a2e1a" stroke-width="0.5"/>
-                        <!-- Up candles -->
-                        <line x1="30" y1="25" x2="30" y2="105" stroke="#22c55e" stroke-width="1"/>
-                        <rect x="22" y="55" width="16" height="35" fill="#22c55e"/>
-                        <line x1="90" y1="20" x2="90" y2="85" stroke="#22c55e" stroke-width="1"/>
-                        <rect x="82" y="38" width="16" height="30" fill="#22c55e"/>
-                        <line x1="200" y1="18" x2="200" y2="75" stroke="#22c55e" stroke-width="1"/>
-                        <rect x="192" y="30" width="16" height="32" fill="#22c55e"/>
-                        <line x1="290" y1="12" x2="290" y2="62" stroke="#22c55e" stroke-width="1"/>
-                        <rect x="282" y="22" width="16" height="28" fill="#22c55e"/>
-                        <line x1="330" y1="10" x2="330" y2="56" stroke="#22c55e" stroke-width="1"/>
-                        <rect x="322" y="18" width="16" height="26" fill="#22c55e"/>
-                        <!-- Down candles -->
-                        <line x1="60" y1="32" x2="60" y2="112" stroke="#ef4444" stroke-width="1"/>
-                        <rect x="52" y="60" width="16" height="32" fill="#ef4444"/>
-                        <line x1="150" y1="38" x2="150" y2="118" stroke="#ef4444" stroke-width="1"/>
-                        <rect x="142" y="62" width="16" height="32" fill="#ef4444"/>
-                        <line x1="250" y1="24" x2="250" y2="82" stroke="#ef4444" stroke-width="1"/>
-                        <rect x="242" y="40" width="16" height="28" fill="#ef4444"/>
-                        <!-- Area -->
-                        <path d="M 30 72 L 60 76 L 90 53 L 150 78 L 200 46 L 250 54 L 290 36 L 330 31 L 330 170 L 30 170 Z" fill="url(#g1)"/>
-                        <!-- Line -->
-                        <polyline points="30,72 60,76 90,53 150,78 200,46 250,54 290,36 330,31" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round"/>
-                        <line x1="0" y1="170" x2="360" y2="170" stroke="#1a3a1a" stroke-width="1"/>
-                    </svg>
+        <div class="proj-grid">
+
+            <article class="proj-card" id="pc-1">
+                <div class="proj-card-top">
+                    <div class="proj-card-visual">
+                        <svg viewBox="0 0 520 280" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="tradGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Grid -->
+                            <line x1="0" y1="56" x2="520" y2="56" stroke="#111" stroke-width="0.5"/>
+                            <line x1="0" y1="112" x2="520" y2="112" stroke="#111" stroke-width="0.5"/>
+                            <line x1="0" y1="168" x2="520" y2="168" stroke="#111" stroke-width="0.5"/>
+                            <line x1="0" y1="224" x2="520" y2="224" stroke="#111" stroke-width="0.5"/>
+                            <line x1="65" y1="0" x2="65" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="130" y1="0" x2="130" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="195" y1="0" x2="195" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="260" y1="0" x2="260" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="325" y1="0" x2="325" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="390" y1="0" x2="390" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <line x1="455" y1="0" x2="455" y2="280" stroke="#111" stroke-width="0.5"/>
+                            <!-- Up candles -->
+                            <line x1="32" y1="28" x2="32" y2="120" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="24" y="56" width="16" height="45" fill="#22c55e"/>
+                            <line x1="97" y1="22" x2="97" y2="95" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="89" y="38" width="16" height="38" fill="#22c55e"/>
+                            <line x1="227" y1="18" x2="227" y2="85" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="219" y="30" width="16" height="38" fill="#22c55e"/>
+                            <line x1="357" y1="12" x2="357" y2="72" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="349" y="22" width="16" height="36" fill="#22c55e"/>
+                            <line x1="422" y1="8" x2="422" y2="65" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="414" y="18" width="16" height="30" fill="#22c55e"/>
+                            <line x1="487" y1="5" x2="487" y2="55" stroke="#22c55e" stroke-width="1"/>
+                            <rect x="479" y="14" width="16" height="28" fill="#22c55e"/>
+                            <!-- Down candles -->
+                            <line x1="162" y1="38" x2="162" y2="130" stroke="#ef4444" stroke-width="1"/>
+                            <rect x="154" y="65" width="16" height="40" fill="#ef4444"/>
+                            <line x1="292" y1="30" x2="292" y2="110" stroke="#ef4444" stroke-width="1"/>
+                            <rect x="284" y="52" width="16" height="35" fill="#ef4444"/>
+                            <!-- Area fill -->
+                            <path d="M 32 78 L 97 57 L 162 85 L 227 49 L 292 70 L 357 40 L 422 33 L 487 28 L 487 240 L 32 240 Z" fill="url(#tradGrad)"/>
+                            <!-- Trend line -->
+                            <polyline points="32,78 97,57 162,85 227,49 292,70 357,40 422,33 487,28" stroke="#22c55e" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+                            <!-- BUY signal -->
+                            <polygon points="97,115 104,132 90,132" fill="#22c55e"/>
+                            <text x="82" y="148" font-family="JetBrains Mono" font-size="9" fill="#22c55e">BUY</text>
+                            <!-- Ticker labels -->
+                            <text x="10" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">MON</text>
+                            <text x="75" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">TUE</text>
+                            <text x="140" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">WED</text>
+                            <text x="210" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">THU</text>
+                            <text x="280" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">FRI</text>
+                        </svg>
+                    </div>
                 </div>
-                <div class="proj-info">
-                    <div class="proj-tags">
-                        <span class="proj-tag proj-tag--green">Python</span>
-                        <span class="proj-tag proj-tag--green">Alpaca API</span>
-                        <span class="proj-tag proj-tag--dim">In Progress</span>
+                <div class="proj-card-info">
+                    <div class="proj-card-meta">
+                        <span class="proj-card-tag green">Python</span>
+                        <span class="proj-card-tag green">Alpaca API</span>
+                        <span class="proj-card-tag dim">In Progress</span>
                     </div>
                     <h3>Autonomous Day Trading Bot</h3>
                     <p>Algorithmic trading system with automated signal detection, position sizing, and risk management. Built with Python using live market data from Alpaca.</p>
+                    <div class="proj-card-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
                 </div>
             </article>
 
-            <article class="proj-card proj-card--locked">
-                <div class="proj-visual proj-visual--soon">
-                    <svg viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                        <rect x="140" y="75" width="80" height="60" rx="5" stroke="#2a2a2a" stroke-width="2"/>
-                        <path d="M 155 75 V 62 a 25 25 0 0 1 50 0 V 75" stroke="#2a2a2a" stroke-width="2"/>
-                        <circle cx="180" cy="105" r="7" fill="#2a2a2a"/>
-                        <line x1="180" y1="112" x2="180" y2="122" stroke="#2a2a2a" stroke-width="2"/>
-                    </svg>
+            <article class="proj-card proj-card--dim" id="pc-2">
+                <div class="proj-card-top">
+                    <div class="proj-card-visual proj-card-visual--soon">
+                        <div class="lock-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="proj-info">
-                    <div class="proj-tags">
-                        <span class="proj-tag proj-tag--dim">Coming Soon</span>
+                <div class="proj-card-info">
+                    <div class="proj-card-meta">
+                        <span class="proj-card-tag dim">Coming Soon</span>
                     </div>
                     <h3>??? — Under Wraps</h3>
                     <p>Something new is in the works. Stay tuned.</p>
                 </div>
             </article>
+
         </div>
     </section>
 
-    <!-- ── CONTACT ── -->
+    <!-- ══ CONTACT ══ -->
     <section class="contact-section" id="contact">
+        <div class="contact-bg-word" aria-hidden="true">HELLO</div>
         <div class="contact-inner">
-            <span class="section-label">04 — CONTACT</span>
-            <h2 class="contact-heading">
-                Let's build<br>something<br><em>great.</em>
+            <span class="kicker">04 — CONTACT</span>
+            <h2 class="contact-title" id="contact-title">
+                <span>Let's</span>
+                <span>build</span>
+                <span class="accent">something.</span>
             </h2>
-            <a href="mailto:hello@saatvikrao.com" class="contact-cta">
-                <span>Say Hello</span>
+            <a href="mailto:hello@saatvikrao.com" class="cta-btn" id="cta-btn">
+                <span class="cta-btn-text">Say Hello</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>
-        <div class="contact-bg-text" aria-hidden="true">HELLO</div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <span>© 2026 Saatvik Rao</span>
+        <span class="mono-sm">© 2026 Saatvik Rao</span>
         <div class="footer-links">
             <a href="https://github.com/Saatvikrao7" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/saatvik-rao" target="_blank">LinkedIn</a>
         </div>
     </footer>
 
-    <!-- Lenis smooth scroll -->
+    <!-- GSAP + ScrollTrigger + Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="script.js"></script>
 </body>
