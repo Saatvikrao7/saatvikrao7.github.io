@@ -298,7 +298,7 @@ gsap.timeline({
         scrub: 1,
     }
 })
-.to(heroTitle,  { scale: 14, opacity: 0, transformOrigin: 'center center', ease: 'none' }, 0)
+.to(heroTitle,  { scale: 2.5, opacity: 0, transformOrigin: 'center center', ease: 'none' }, 0)
 .to([heroMeta, heroFoot], { opacity: 0, ease: 'none' }, 0)
 .to(heroBg,     { opacity: 0, ease: 'none' }, 0)
 .to(heroCanvas, { opacity: 0, ease: 'none' }, 0);
@@ -513,11 +513,11 @@ document.querySelectorAll('.about-kicker, .proj-header .kicker, .contact-inner .
 const bgSections = [
     { el: document.getElementById('hero'),              cls: 'bg--dark' },
     { el: document.querySelector('.zoom-bridge'),       cls: 'bg--dark' },
-    { el: document.querySelector('.marquee-section'),   cls: 'bg--dark' },
-    { el: document.querySelector('.stats-strip'),       cls: 'bg--dark' },
+    { el: document.querySelector('.marquee-section'),   cls: 'bg--contact' },
+    { el: document.querySelector('.stats-strip'),       cls: 'bg--contact' },
     { el: document.getElementById('work'),              cls: 'bg--work' },
     { el: document.getElementById('about'),             cls: 'bg--light' },
-    { el: document.getElementById('projects'),          cls: 'bg--dark' },
+    { el: document.getElementById('projects'),          cls: 'bg--contact' },
     { el: document.getElementById('contact'),           cls: 'bg--contact' },
 ];
 
@@ -536,15 +536,6 @@ function setBg(cls) {
     bgCanvas.className = 'bg-canvas ' + cls;
 }
 
-ScrollTrigger.create({
-    trigger: '#about',
-    start: 'top 50%',
-    end: 'bottom 50%',
-    onEnter:     () => document.getElementById('about').classList.add('is-light'),
-    onLeave:     () => document.getElementById('about').classList.remove('is-light'),
-    onEnterBack: () => document.getElementById('about').classList.add('is-light'),
-    onLeaveBack: () => document.getElementById('about').classList.remove('is-light'),
-});
 
 
 /* ── Footer Reveal ── */
@@ -578,7 +569,7 @@ lenis.on('scroll', ({ scroll }) => {
 
 
 /* ── Chapter Dots — Dark Section Awareness ── */
-const darkSectionIds = ['hero', 'about'];
+const darkSectionIds = ['hero'];
 const allChapterDots = document.querySelectorAll('.chapter-dot');
 
 function updateDotTheme(sectionId) {
