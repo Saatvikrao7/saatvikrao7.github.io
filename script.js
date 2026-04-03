@@ -298,7 +298,7 @@ gsap.timeline({
         scrub: 1,
     }
 })
-.to(heroTitle,  { scale: 2.5, opacity: 0, transformOrigin: 'center center', ease: 'none' }, 0)
+.to(heroTitle,  { scale: 1, opacity: 0, transformOrigin: 'center center', ease: 'none' }, 0)
 .to([heroMeta, heroFoot], { opacity: 0, ease: 'none' }, 0)
 .to(heroBg,     { opacity: 0, ease: 'none' }, 0)
 .to(heroCanvas, { opacity: 0, ease: 'none' }, 0);
