@@ -268,7 +268,53 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
 })();
 
 
-/* ── Hero Text Scrambler ── */
+/* ── Shared scramble utility ── */
+const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
+function scrambleEl(el, target, speed = 0.5, onDone) {
+    let frame = 0;
+    const t = setInterval(() => {
+        el.textContent = target.split('').map((ch, i) => {
+            if (ch === ' ') return ' ';
+            if (i < frame) return ch;
+            return pool[Math.floor(Math.random() * pool.length)];
+        }).join('');
+        frame += speed;
+        if (frame > target.length) {
+            clearInterval(t);
+            el.textContent = target;
+            if (onDone) onDone();
+        }
+    }, 35);
+    return t;
+}
+
+
+/* ── Name scramble (load + hover) ── */
+(function initNameScramble() {
+    const ht1 = document.getElementById('ht1');
+    const ht2 = document.getElementById('ht2');
+    if (!ht1 || !ht2) return;
+    let busy = false;
+
+    function runNameScramble() {
+        if (busy) return;
+        busy = true;
+        scrambleEl(ht1, 'Saatvik', 0.45, () => {
+            setTimeout(() => {
+                scrambleEl(ht2, 'Rao', 0.6, () => { busy = false; });
+            }, 80);
+        });
+    }
+
+    // Fire once after the slide-in animation completes
+    setTimeout(runNameScramble, 2400);
+
+    // Re-scramble on hover
+    document.getElementById('hero-title-wrap').addEventListener('mouseenter', runNameScramble);
+})();
+
+
+/* ── Bottom-right label scrambler (cycles phrases) ── */
 (function initScrambler() {
     const el = document.getElementById('hero-scramble');
     if (!el) return;
@@ -278,34 +324,17 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
         'software developer',
         'cs grad    @ asu',
     ];
-    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
     let idx = 0;
-    let timer = null;
+    let cycleTimer = null;
 
-    function scrambleTo(target) {
-        let frame = 0;
-        clearInterval(timer);
-        timer = setInterval(() => {
-            el.textContent = target.split('').map((ch, i) => {
-                if (ch === ' ') return ' ';
-                if (i < frame) return ch;
-                return pool[Math.floor(Math.random() * pool.length)];
-            }).join('');
-            frame += 0.5;
-            if (frame > target.length) {
-                clearInterval(timer);
-                el.textContent = target;
-            }
-        }, 35);
+    function next() {
+        idx = (idx + 1) % phrases.length;
+        scrambleEl(el, phrases[idx], 0.5);
     }
 
-    // First scramble after hero animates in, then cycle every 2.8s
     setTimeout(() => {
-        scrambleTo(phrases[idx]);
-        setInterval(() => {
-            idx = (idx + 1) % phrases.length;
-            scrambleTo(phrases[idx]);
-        }, 2800);
+        scrambleEl(el, phrases[idx], 0.5);
+        cycleTimer = setInterval(next, 2800);
     }, 2000);
 })();
 
