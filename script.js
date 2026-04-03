@@ -305,25 +305,16 @@ function scrambleEl(el, target, speed = 0.5, onDone) {
 })();
 
 
-/* ── Continuous hover scramble on title + flankers ── */
+/* ── Hover scramble: name continuously scrambles, right flanker swaps word ── */
 (function initHoverScramble() {
-    const wrap = document.getElementById('hero-title-wrap');
-    const ht1  = document.getElementById('ht1');
-    const ht2  = document.getElementById('ht2');
-    const flL  = document.getElementById('flanker-left');
-    const flR  = document.getElementById('flanker-right');
-    if (!wrap || !ht1) return;
-
-    const targets = [
-        { el: ht1, text: 'Saatvik' },
-        { el: ht2, text: 'Rao' },
-        ...[...flL.querySelectorAll('span')].map(s => ({ el: s, text: s.dataset.text })),
-        ...[...flR.querySelectorAll('span')].map(s => ({ el: s, text: s.dataset.text })),
-    ];
+    const ht1 = document.getElementById('ht1');
+    const ht2 = document.getElementById('ht2');
+    const frSpan = document.querySelector('#flanker-right span');
+    if (!ht1) return;
 
     const timers = new Map();
 
-    function startScramble({ el, text }) {
+    function startContinuous(el, text) {
         if (timers.has(el)) clearInterval(timers.get(el));
         timers.set(el, setInterval(() => {
             el.textContent = text.split('').map(ch =>
@@ -332,13 +323,39 @@ function scrambleEl(el, target, speed = 0.5, onDone) {
         }, 55));
     }
 
-    function settle({ el, text }) {
+    function stopAndSettle(el, text) {
         if (timers.has(el)) { clearInterval(timers.get(el)); timers.delete(el); }
         scrambleEl(el, text, 0.55);
     }
 
-    wrap.addEventListener('mouseenter', () => targets.forEach(startScramble));
-    wrap.addEventListener('mouseleave', () => targets.forEach(settle));
+    // Name: continuous scramble while hovering
+    const nameWrap = document.getElementById('hero-title');
+    if (nameWrap) {
+        nameWrap.style.cursor = 'default';
+        nameWrap.addEventListener('mouseenter', () => {
+            startContinuous(ht1, 'Saatvik');
+            startContinuous(ht2, 'Rao');
+        });
+        nameWrap.addEventListener('mouseleave', () => {
+            stopAndSettle(ht1, 'Saatvik');
+            stopAndSettle(ht2, 'Rao');
+        });
+    }
+
+    // Right flanker: hover → scramble to alt text, leave → scramble back
+    if (frSpan) {
+        let state = 'default'; // 'default' | 'alt'
+        frSpan.style.cursor = 'default';
+        frSpan.addEventListener('mouseenter', () => {
+            if (state === 'alt') return;
+            state = 'alt';
+            scrambleEl(frSpan, frSpan.dataset.alt, 0.5);
+        });
+        frSpan.addEventListener('mouseleave', () => {
+            state = 'default';
+            scrambleEl(frSpan, frSpan.dataset.text, 0.5);
+        });
+    }
 })();
 
 
