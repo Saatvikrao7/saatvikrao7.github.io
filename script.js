@@ -268,6 +268,48 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
 })();
 
 
+/* ── Hero Text Scrambler ── */
+(function initScrambler() {
+    const el = document.getElementById('hero-scramble');
+    if (!el) return;
+
+    const phrases = [
+        'consultant @ deloitte',
+        'software developer',
+        'cs grad    @ asu',
+    ];
+    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
+    let idx = 0;
+    let timer = null;
+
+    function scrambleTo(target) {
+        let frame = 0;
+        clearInterval(timer);
+        timer = setInterval(() => {
+            el.textContent = target.split('').map((ch, i) => {
+                if (ch === ' ') return ' ';
+                if (i < frame) return ch;
+                return pool[Math.floor(Math.random() * pool.length)];
+            }).join('');
+            frame += 0.5;
+            if (frame > target.length) {
+                clearInterval(timer);
+                el.textContent = target;
+            }
+        }, 35);
+    }
+
+    // First scramble after hero animates in, then cycle every 2.8s
+    setTimeout(() => {
+        scrambleTo(phrases[idx]);
+        setInterval(() => {
+            idx = (idx + 1) % phrases.length;
+            scrambleTo(phrases[idx]);
+        }, 2800);
+    }, 2000);
+})();
+
+
 /* ── Hero Load Animation + Color Flash ── */
 window.addEventListener('load', () => {
     gsap.fromTo('#ht1', { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out', delay: 0.8 });
