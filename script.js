@@ -289,28 +289,56 @@ function scrambleEl(el, target, speed = 0.5, onDone) {
 }
 
 
-/* ── Name scramble (load + hover) ── */
+/* ── Name scramble on load ── */
 (function initNameScramble() {
     const ht1 = document.getElementById('ht1');
     const ht2 = document.getElementById('ht2');
     if (!ht1 || !ht2) return;
     let busy = false;
-
-    function runNameScramble() {
-        if (busy) return;
-        busy = true;
+    function run() {
+        if (busy) return; busy = true;
         scrambleEl(ht1, 'Saatvik', 0.45, () => {
-            setTimeout(() => {
-                scrambleEl(ht2, 'Rao', 0.6, () => { busy = false; });
-            }, 80);
+            setTimeout(() => scrambleEl(ht2, 'Rao', 0.6, () => { busy = false; }), 80);
         });
     }
+    setTimeout(run, 2400);
+})();
 
-    // Fire once after the slide-in animation completes
-    setTimeout(runNameScramble, 2400);
 
-    // Re-scramble on hover
-    document.getElementById('hero-title-wrap').addEventListener('mouseenter', runNameScramble);
+/* ── Continuous hover scramble on title + flankers ── */
+(function initHoverScramble() {
+    const wrap = document.getElementById('hero-title-wrap');
+    const ht1  = document.getElementById('ht1');
+    const ht2  = document.getElementById('ht2');
+    const flL  = document.getElementById('flanker-left');
+    const flR  = document.getElementById('flanker-right');
+    if (!wrap || !ht1) return;
+
+    const targets = [
+        { el: ht1, text: 'Saatvik' },
+        { el: ht2, text: 'Rao' },
+        ...[...flL.querySelectorAll('span')].map(s => ({ el: s, text: s.dataset.text })),
+        ...[...flR.querySelectorAll('span')].map(s => ({ el: s, text: s.dataset.text })),
+    ];
+
+    const timers = new Map();
+
+    function startScramble({ el, text }) {
+        if (timers.has(el)) clearInterval(timers.get(el));
+        timers.set(el, setInterval(() => {
+            el.textContent = text.split('').map(ch =>
+                (ch === ' ' || ch === '@') ? ch : pool[Math.floor(Math.random() * pool.length)]
+            ).join('');
+        }, 55));
+    }
+
+    function settle({ el, text }) {
+        if (timers.has(el)) { clearInterval(timers.get(el)); timers.delete(el); }
+        scrambleEl(el, text, 0.55);
+    }
+
+    wrap.addEventListener('mouseenter', () => targets.forEach(startScramble));
+    wrap.addEventListener('mouseleave', () => targets.forEach(settle));
 })();
 
 
