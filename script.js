@@ -92,7 +92,7 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
         uniforms: {
             uTime:     { value: 0 },
             uMouse:    { value: new THREE.Vector2(0, 0) },
-            uAccent:   { value: new THREE.Color(0xc8f542) },
+            uAccent:   { value: new THREE.Color(0xc0562e) },
         },
         vertexShader: `
             attribute float size;
@@ -241,7 +241,7 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
                 n += sin((p.x + p.y) * 1.2 + t * 0.7) * 0.5;
                 n = n * 0.5 + 0.5;
 
-                vec3 accent = vec3(0.784, 0.961, 0.259); // #c8f542
+                vec3 accent = vec3(0.753, 0.337, 0.18); // #c0562e
                 float alpha = n * 0.06 * (1.0 - distance(uv, vec2(0.5)) * 1.2);
                 alpha = max(0.0, alpha);
 
@@ -325,7 +325,7 @@ document.querySelectorAll('.tilt-btn').forEach(btn => {
         const dx = (e.clientX - cx) / (rect.width  / 2);
         const dy = (e.clientY - cy) / (rect.height / 2);
         btn.style.transform = `perspective(400px) rotateX(${dy * -5}deg) rotateY(${dx * 7}deg) scale(1.04)`;
-        btn.style.boxShadow = `${-dx * 6}px ${-dy * 6}px 20px rgba(200,245,66,0.2)`;
+        btn.style.boxShadow = `${-dx * 6}px ${-dy * 6}px 20px rgba(192,86,46,0.2)`;
     });
     btn.addEventListener('mouseleave', () => {
         btn.style.transform = '';
