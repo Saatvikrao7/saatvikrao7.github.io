@@ -268,118 +268,101 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
 })();
 
 
-/* ── Shared scramble utility ── */
+/* ══ SCRAMBLE SYSTEM ══
+   One timer per element guaranteed — new call always cancels the previous.
+   ══════════════════════════════════════════════════════════════════════ */
 const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
-function scrambleEl(el, target, speed = 0.5, onDone) {
+const _timers = new Map(); // element → interval id
+
+/* Settle: scrambles random → target, then stops */
+function scrambleTo(el, target, speed, onDone) {
+    if (_timers.has(el)) clearInterval(_timers.get(el));
     let frame = 0;
     const t = setInterval(() => {
         el.textContent = target.split('').map((ch, i) => {
-            if (ch === ' ') return ' ';
-            if (i < frame) return ch;
-            return pool[Math.floor(Math.random() * pool.length)];
+            if (ch === ' ' || ch === '@') return ch;
+            return i < frame ? ch : pool[Math.floor(Math.random() * pool.length)];
         }).join('');
-        frame += speed;
+        frame += (speed || 0.5);
         if (frame > target.length) {
             clearInterval(t);
+            _timers.delete(el);
             el.textContent = target;
             if (onDone) onDone();
         }
     }, 35);
-    return t;
+    _timers.set(el, t);
+}
+
+/* Glitch: scrambles all chars continuously until stopped */
+function scrambleLoop(el, text) {
+    if (_timers.has(el)) clearInterval(_timers.get(el));
+    const t = setInterval(() => {
+        el.textContent = text.split('').map(ch =>
+            (ch === ' ' || ch === '@') ? ch : pool[Math.floor(Math.random() * pool.length)]
+        ).join('');
+    }, 60);
+    _timers.set(el, t);
+}
+
+function scrambleStop(el) {
+    if (_timers.has(el)) { clearInterval(_timers.get(el)); _timers.delete(el); }
 }
 
 
-/* ── Name scramble on load ── */
-(function initNameScramble() {
+/* ── On-load: name scrambles in once after slide animation ── */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        scrambleTo(document.getElementById('ht1'), 'Saatvik', 0.45, () => {
+            setTimeout(() => scrambleTo(document.getElementById('ht2'), 'Rao', 0.6), 80);
+        });
+    }, 2400);
+});
+
+
+/* ── Hover name → continuous glitch; leave → settle back ── */
+(function() {
+    const nameEl = document.getElementById('hero-title');
     const ht1 = document.getElementById('ht1');
     const ht2 = document.getElementById('ht2');
-    if (!ht1 || !ht2) return;
-    let busy = false;
-    function run() {
-        if (busy) return; busy = true;
-        scrambleEl(ht1, 'Saatvik', 0.45, () => {
-            setTimeout(() => scrambleEl(ht2, 'Rao', 0.6, () => { busy = false; }), 80);
-        });
-    }
-    setTimeout(run, 2400);
+    if (!nameEl || !ht1) return;
+    nameEl.addEventListener('mouseenter', () => {
+        scrambleLoop(ht1, 'Saatvik');
+        scrambleLoop(ht2, 'Rao');
+    });
+    nameEl.addEventListener('mouseleave', () => {
+        scrambleStop(ht1); scrambleTo(ht1, 'Saatvik', 0.5);
+        scrambleStop(ht2); scrambleTo(ht2, 'Rao', 0.6);
+    });
 })();
 
 
-/* ── Hover scramble: name continuously scrambles, right flanker swaps word ── */
-(function initHoverScramble() {
-    const ht1 = document.getElementById('ht1');
-    const ht2 = document.getElementById('ht2');
-    const frSpan = document.querySelector('#flanker-right span');
-    if (!ht1) return;
-
-    const timers = new Map();
-
-    function startContinuous(el, text) {
-        if (timers.has(el)) clearInterval(timers.get(el));
-        timers.set(el, setInterval(() => {
-            el.textContent = text.split('').map(ch =>
-                (ch === ' ' || ch === '@') ? ch : pool[Math.floor(Math.random() * pool.length)]
-            ).join('');
-        }, 55));
-    }
-
-    function stopAndSettle(el, text) {
-        if (timers.has(el)) { clearInterval(timers.get(el)); timers.delete(el); }
-        scrambleEl(el, text, 0.55);
-    }
-
-    // Name: continuous scramble while hovering
-    const nameWrap = document.getElementById('hero-title');
-    if (nameWrap) {
-        nameWrap.style.cursor = 'default';
-        nameWrap.addEventListener('mouseenter', () => {
-            startContinuous(ht1, 'Saatvik');
-            startContinuous(ht2, 'Rao');
-        });
-        nameWrap.addEventListener('mouseleave', () => {
-            stopAndSettle(ht1, 'Saatvik');
-            stopAndSettle(ht2, 'Rao');
-        });
-    }
-
-    // Right flanker: hover → scramble to alt text, leave → scramble back
-    if (frSpan) {
-        let state = 'default'; // 'default' | 'alt'
-        frSpan.style.cursor = 'default';
-        frSpan.addEventListener('mouseenter', () => {
-            if (state === 'alt') return;
-            state = 'alt';
-            scrambleEl(frSpan, frSpan.dataset.alt, 0.5);
-        });
-        frSpan.addEventListener('mouseleave', () => {
-            state = 'default';
-            scrambleEl(frSpan, frSpan.dataset.text, 0.5);
-        });
-    }
+/* ── Hover right flanker → swap CONSULTANT ↔ @ DELOITTE ── */
+(function() {
+    const span = document.querySelector('#flanker-right span');
+    if (!span) return;
+    let alt = false;
+    span.addEventListener('mouseenter', () => {
+        if (alt) return;
+        alt = true;
+        scrambleTo(span, span.dataset.alt, 0.45);
+    });
+    span.addEventListener('mouseleave', () => {
+        alt = false;
+        scrambleTo(span, span.dataset.text, 0.45);
+    });
 })();
 
 
-/* ── Bottom-right label scrambler (cycles phrases) ── */
-(function initScrambler() {
+/* ── Bottom-right: cycle phrases every 3s ── */
+(function() {
     const el = document.getElementById('hero-scramble');
     if (!el) return;
-
-    const phrases = [
-        'consultant @ deloitte',
-        'software developer',
-        'cs grad    @ asu',
-    ];
+    const phrases = ['consultant @ deloitte', 'software developer', 'cs grad    @ asu'];
     let idx = 0;
-    let cycleTimer = null;
-
-    function next() {
-        idx = (idx + 1) % phrases.length;
-        scrambleEl(el, phrases[idx], 0.5);
-    }
-
     setTimeout(() => {
-        scrambleEl(el, phrases[idx], 0.5);
-        cycleTimer = setInterval(next, 2800);
+        scrambleTo(el, phrases[0], 0.5);
+        setInterval(() => { idx = (idx + 1) % phrases.length; scrambleTo(el, phrases[idx], 0.5); }, 3000);
     }, 2000);
 })();
 
