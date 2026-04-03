@@ -129,15 +129,15 @@ document.querySelectorAll('a, button, .stack-item, .cta-btn, .nav-logo, .proj-ca
             void main() {
                 float d = length(gl_PointCoord - 0.5) * 2.0;
                 if (d > 1.0) discard;
-                float alpha = (1.0 - d) * vAlpha;
-                // Mix white and accent
-                vec3 col = mix(uAccent, vec3(1.0), 0.4);
+                float alpha = (1.0 - d * d) * vAlpha * 0.55;
+                // Dark charcoal dots on cream background
+                vec3 col = vec3(0.05, 0.05, 0.05);
                 gl_FragColor = vec4(col, alpha);
             }
         `,
         transparent: true,
         depthWrite: false,
-        blending: THREE.AdditiveBlending,
+        blending: THREE.NormalBlending,
     });
 
     const particles = new THREE.Points(geometry, material);
@@ -511,8 +511,8 @@ document.querySelectorAll('.about-kicker, .proj-header .kicker, .contact-inner .
 
 /* ── BG Canvas Section Color Transitions ── */
 const bgSections = [
-    { el: document.getElementById('hero'),              cls: 'bg--dark' },
-    { el: document.querySelector('.zoom-bridge'),       cls: 'bg--dark' },
+    { el: document.getElementById('hero'),              cls: 'bg--contact' },
+    { el: document.querySelector('.zoom-bridge'),       cls: 'bg--contact' },
     { el: document.querySelector('.marquee-section'),   cls: 'bg--contact' },
     { el: document.querySelector('.stats-strip'),       cls: 'bg--contact' },
     { el: document.getElementById('work'),              cls: 'bg--work' },
