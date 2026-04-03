@@ -566,3 +566,107 @@ gsap.utils.toArray('.wp-meta, .stat-item, .proj-card-info, .about-kicker').forEa
           scrollTrigger: { trigger: el, start: 'top 88%' } }
     );
 });
+
+
+/* ── Scroll Progress Bar ── */
+const scrollProgress = document.getElementById('scroll-progress');
+lenis.on('scroll', ({ scroll }) => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(scroll / total * 100, 100);
+    scrollProgress.style.width = pct + '%';
+});
+
+
+/* ── Chapter Dots — Dark Section Awareness ── */
+const darkSectionIds = ['hero', 'about'];
+const allChapterDots = document.querySelectorAll('.chapter-dot');
+
+function updateDotTheme(sectionId) {
+    const isDark = darkSectionIds.includes(sectionId);
+    allChapterDots.forEach(dot => {
+        dot.classList.toggle('on-dark', isDark);
+    });
+}
+
+// Wire into existing chapter section triggers
+['hero', 'work', 'about', 'projects', 'contact'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    ScrollTrigger.create({
+        trigger: el,
+        start: 'top 50%',
+        end: 'bottom 50%',
+        onEnter:     () => updateDotTheme(id),
+        onEnterBack: () => updateDotTheme(id),
+    });
+});
+updateDotTheme('hero'); // initial state
+
+
+/* ── Magnetic CTA Button ── */
+const magneticWrap = document.getElementById('magnetic-wrap');
+const ctaBtn = document.getElementById('cta-btn');
+
+if (magneticWrap && ctaBtn) {
+    magneticWrap.addEventListener('mousemove', e => {
+        const rect = magneticWrap.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top  + rect.height / 2;
+        const dx = (e.clientX - cx) * 0.35;
+        const dy = (e.clientY - cy) * 0.45;
+        gsap.to(ctaBtn, { x: dx, y: dy, duration: 0.5, ease: 'power2.out' });
+    });
+
+    magneticWrap.addEventListener('mouseleave', () => {
+        gsap.to(ctaBtn, { x: 0, y: 0, duration: 0.7, ease: 'expo.out' });
+    });
+}
+
+
+/* ── Hero Mouse Parallax ── */
+const heroSection = document.getElementById('hero');
+const heroMeta2 = document.getElementById('hero-meta');
+const heroFoot2 = document.getElementById('hero-foot');
+const scrollHintEl = document.querySelector('.scroll-hint');
+const heroGrid = document.querySelector('.hero-grid');
+
+if (heroSection) {
+    heroSection.addEventListener('mousemove', e => {
+        const cx = window.innerWidth  / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;
+        const dy = (e.clientY - cy) / cy;
+
+        gsap.to(heroMeta2,     { x: dx * 18,  y: dy * 10,  duration: 1.2, ease: 'power2.out' });
+        gsap.to(heroFoot2,     { x: dx * -12, y: dy * -8,  duration: 1.2, ease: 'power2.out' });
+        gsap.to(scrollHintEl,  { x: dx * 14,  y: dy * 12,  duration: 1.2, ease: 'power2.out' });
+        gsap.to(heroGrid,      { x: dx * -6,  y: dy * -4,  duration: 1.6, ease: 'power2.out' });
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+        gsap.to([heroMeta2, heroFoot2, scrollHintEl, heroGrid],
+            { x: 0, y: 0, duration: 1, ease: 'expo.out' });
+    });
+}
+
+
+/* ── Section heading clip-path reveal ── */
+document.querySelectorAll('.section-heading').forEach(el => {
+    gsap.fromTo(el,
+        { 'clip-path': 'inset(0 0 100% 0)', opacity: 1 },
+        { 'clip-path': 'inset(0 0 0% 0)', duration: 1.1, ease: 'expo.out',
+          scrollTrigger: { trigger: el, start: 'top 85%' } }
+    );
+});
+
+
+/* ── Skills ticker hover pause ── */
+const tickerEl = document.querySelector('.skills-ticker-inner');
+if (tickerEl) {
+    tickerEl.addEventListener('mouseenter', () => tickerEl.style.animationPlayState = 'paused');
+    tickerEl.addEventListener('mouseleave', () => tickerEl.style.animationPlayState = 'running');
+}
+
+
+/* ── Stat numbers use dark text color ── */
+/* (handled via CSS, no JS needed) */

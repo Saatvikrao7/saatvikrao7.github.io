@@ -11,6 +11,12 @@
 </head>
 <body>
 
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Noise grain overlay -->
+    <div class="noise-overlay"></div>
+
     <!-- Split screen loader -->
     <div class="loader" id="loader">
         <div class="loader-top"></div>
@@ -37,7 +43,7 @@
     </nav>
 
     <!-- Background canvas - transitions color between sections -->
-    <div class="bg-canvas" id="bg-canvas"></div>
+    <div class="bg-canvas bg--dark" id="bg-canvas"></div>
 
     <!-- Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
@@ -125,6 +131,41 @@
                 <span>Arizona State</span><span class="marquee-dot">✦</span>
                 <span>Healthcare IT</span><span class="marquee-dot">✦</span>
             </div>
+        </div>
+    </div>
+
+    <!-- ══ SKILLS TICKER ══ -->
+    <div class="skills-ticker">
+        <div class="skills-ticker-inner">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Dynamics 365</span>
+            <span class="skill-tag">Power Platform</span>
+            <span class="skill-tag">SSIS</span>
+            <span class="skill-tag">SSMS</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Alpaca API</span>
+            <span class="skill-tag">Data Migration</span>
+            <span class="skill-tag">ETL Pipelines</span>
+            <!-- duplicate for seamless loop -->
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Dynamics 365</span>
+            <span class="skill-tag">Power Platform</span>
+            <span class="skill-tag">SSIS</span>
+            <span class="skill-tag">SSMS</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Alpaca API</span>
+            <span class="skill-tag">Data Migration</span>
+            <span class="skill-tag">ETL Pipelines</span>
         </div>
     </div>
 
@@ -220,9 +261,9 @@
                                 <text x="340" y="145" font-family="JetBrains Mono" font-size="8" fill="rgba(200,245,66,0.4)">RECORDS MIGRATED</text>
                                 <!-- Status indicators -->
                                 <circle cx="350" cy="280" r="4" fill="#c8f542" opacity="0.9"/>
-                                <text x="362" y="284" font-family="JetBrains Mono" font-size="9" fill="rgba(240,237,232,0.5)">LIVE IN PRODUCTION</text>
+                                <text x="362" y="284" font-family="JetBrains Mono" font-size="9" fill="rgba(13,13,13,0.45)">LIVE IN PRODUCTION</text>
                                 <circle cx="350" cy="305" r="4" fill="rgba(200,245,66,0.4)"/>
-                                <text x="362" y="309" font-family="JetBrains Mono" font-size="9" fill="rgba(240,237,232,0.3)">CALIFORNIA STATEWIDE</text>
+                                <text x="362" y="309" font-family="JetBrains Mono" font-size="9" fill="rgba(13,13,13,0.3)">CALIFORNIA STATEWIDE</text>
                             </svg>
                         </div>
                     </div>
@@ -404,6 +445,7 @@
     <section class="proj-section" id="projects">
         <div class="proj-header">
             <span class="kicker">03 — PERSONAL PROJECTS</span>
+            <h2 class="section-heading">Side<br><em style="font-style:italic;color:var(--accent)">projects.</em></h2>
         </div>
         <div class="proj-grid">
 
@@ -455,11 +497,11 @@
                             <polygon points="97,115 104,132 90,132" fill="#22c55e"/>
                             <text x="82" y="148" font-family="JetBrains Mono" font-size="9" fill="#22c55e">BUY</text>
                             <!-- Ticker labels -->
-                            <text x="10" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">MON</text>
-                            <text x="75" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">TUE</text>
-                            <text x="140" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">WED</text>
-                            <text x="210" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">THU</text>
-                            <text x="280" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(240,237,232,0.2)">FRI</text>
+                            <text x="10" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(13,13,13,0.25)">MON</text>
+                            <text x="75" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(13,13,13,0.25)">TUE</text>
+                            <text x="140" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(13,13,13,0.25)">WED</text>
+                            <text x="210" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(13,13,13,0.25)">THU</text>
+                            <text x="280" y="276" font-family="JetBrains Mono" font-size="8" fill="rgba(13,13,13,0.25)">FRI</text>
                         </svg>
                     </div>
                 </div>
@@ -507,10 +549,12 @@
                 <span>build</span>
                 <span class="accent">something.</span>
             </h2>
-            <a href="mailto:hello@saatvikrao.com" class="cta-btn tilt-btn" id="cta-btn">
-                <span class="cta-btn-text">Say Hello</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+            <div class="magnetic-wrap" id="magnetic-wrap">
+                <a href="mailto:hello@saatvikrao.com" class="cta-btn tilt-btn" id="cta-btn">
+                    <span class="cta-btn-text">Say Hello</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
         </div>
     </section>
 
