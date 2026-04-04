@@ -998,8 +998,129 @@ a { color: inherit; text-decoration: none; }
 }
 
 .proj-card:hover .proj-card-arrow {
-    color: #0a8c30;
+    color: var(--accent);
     transform: translate(4px, -4px);
+}
+
+/* ── Project Card Flip ── */
+.proj-card-inner {
+    position: relative;
+}
+
+.proj-card-front {
+    transition: transform 0.22s ease-in, opacity 0.22s ease-in;
+    transform-origin: center;
+}
+
+.proj-card.flipped .proj-card-front {
+    transform: scaleX(0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.proj-card-back {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #e8e5de;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: center;
+    transition: transform 0.22s ease-out 0.18s, opacity 0.22s ease-out 0.18s;
+    pointer-events: none;
+}
+
+.proj-card.flipped .proj-card-back {
+    transform: scaleX(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.flip-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+.proj-card-back h4 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--fg);
+    line-height: 1.2;
+}
+
+.flip-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.flip-bullets li {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: rgba(13,13,13,0.72);
+    padding-left: 1.1rem;
+    position: relative;
+}
+
+.flip-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.flip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.flip-back-btn {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: rgba(13,13,13,0.35);
+    margin-top: auto;
+    transition: color 0.2s;
+}
+
+.proj-card-back:hover .flip-back-btn {
+    color: rgba(13,13,13,0.65);
+}
+
+.flip-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.flip-hint-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: rgba(13,13,13,0.3);
+    transition: color 0.2s;
+}
+
+.proj-card:hover .flip-hint-label {
+    color: var(--accent);
 }
 
 /* ── CONTACT ── */

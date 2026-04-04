@@ -869,6 +869,14 @@ if (tickerEl) {
 /* (handled via CSS, no JS needed) */
 
 
+/* ── Project Card Flip ── */
+document.querySelectorAll('.proj-card:not(.proj-card--dim)').forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+    });
+});
+
+
 /* ── DNA Helix Canvas Animation ── */
 (function initDNAHelix() {
     const canvas = document.getElementById('dna-helix-canvas');
