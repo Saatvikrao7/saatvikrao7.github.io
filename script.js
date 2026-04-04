@@ -864,3 +864,92 @@ if (tickerEl) {
 
 /* ── Stat numbers use dark text color ── */
 /* (handled via CSS, no JS needed) */
+
+
+/* ── DNA Helix Canvas Animation ── */
+(function initDNAHelix() {
+    const canvas = document.getElementById('dna-helix-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;   // 150
+    const H = canvas.height;  // 300
+
+    const cx    = W / 2;      // center x = 75
+    const amp   = 48;         // amplitude (x radius) — wider for bigger canvas
+    const steps = 80;         // more points = smoother
+    let phase = 0;
+    let rafId = null;
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Build point arrays for both strands
+        const A = [], B = [];
+        for (let i = 0; i <= steps; i++) {
+            const t     = i / steps;
+            const y     = 8 + t * (H - 16);        // slight top/bottom padding
+            const angle = phase + t * Math.PI * 5;  // 2.5 full turns
+            const xA    = cx + Math.cos(angle) * amp;
+            const xB    = cx + Math.cos(angle + Math.PI) * amp;
+            const zA    = Math.sin(angle);
+            const zB    = Math.sin(angle + Math.PI);
+            A.push({ x: xA, y, z: zA });
+            B.push({ x: xB, y, z: zB });
+        }
+
+        // Draw rungs (base pairs) — behind strands
+        for (let i = 0; i <= steps; i++) {
+            if (i % 6 !== 0) continue;
+            const a = A[i], b = B[i];
+            const zAvg = (a.z + b.z) / 2;
+            // Only draw rungs that are facing us (front) or near-front
+            const alpha = 0.08 + 0.28 * Math.max(0, zAvg);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(13,13,13,${alpha.toFixed(2)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // Helper: draw one strand as connected segments with depth
+        function drawStrand(pts, colorFront, colorBack) {
+            for (let i = 0; i < pts.length - 1; i++) {
+                const p1 = pts[i], p2 = pts[i + 1];
+                const zMid  = (p1.z + p2.z) / 2;
+                const t01   = (zMid + 1) / 2;          // 0 = back, 1 = front
+                const alpha = 0.18 + 0.72 * t01;
+                const lw    = 1.0 + 1.8 * t01;
+                const col   = zMid >= 0 ? colorFront : colorBack;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = col.replace('A', alpha.toFixed(2));
+                ctx.lineWidth = lw;
+                ctx.stroke();
+            }
+        }
+
+        drawStrand(A, 'rgba(13,13,13,A)',    'rgba(13,13,13,A)');
+        drawStrand(B, 'rgba(192,86,46,A)',   'rgba(192,86,46,A)');
+
+        // Node dots at rung junctions
+        for (let i = 0; i <= steps; i++) {
+            if (i % 6 !== 0) continue;
+            [[A[i], 'rgba(13,13,13,'], [B[i], 'rgba(192,86,46,']].forEach(([pt, col]) => {
+                const t01  = (pt.z + 1) / 2;
+                const alph = (0.3 + 0.6 * t01).toFixed(2);
+                const r    = 1.8 + 2.2 * t01;
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, r, 0, Math.PI * 2);
+                ctx.fillStyle = col + alph + ')';
+                ctx.fill();
+            });
+        }
+
+        phase += 0.014;
+        rafId = requestAnimationFrame(draw);
+    }
+
+    draw();
+})();
