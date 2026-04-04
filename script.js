@@ -869,12 +869,7 @@ if (tickerEl) {
 /* (handled via CSS, no JS needed) */
 
 
-/* ── Project Card Flip ── */
-document.addEventListener('click', e => {
-    const card = e.target.closest('.proj-card');
-    if (!card || card.classList.contains('proj-card--dim')) return;
-    card.classList.toggle('flipped');
-});
+/* ── Project Card Flip — handled by inline script in HTML ── */
 
 
 /* ── DNA Helix Canvas Animation ── */
