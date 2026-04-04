@@ -320,19 +320,123 @@ window.addEventListener('load', () => {
 });
 
 
-/* ── Hover name → continuous glitch; leave → settle back ── */
-(function() {
-    const nameEl = document.getElementById('hero-title');
+/* ── Molecular particle hover on name ── */
+(function initMolecular() {
+    const titleEl = document.getElementById('hero-title');
     const ht1 = document.getElementById('ht1');
     const ht2 = document.getElementById('ht2');
-    if (!nameEl || !ht1) return;
-    nameEl.addEventListener('mouseenter', () => {
-        scrambleLoop(ht1, 'Saatvik');
-        scrambleLoop(ht2, 'Rao');
+    if (!titleEl || !ht1) return;
+
+    /* overlay canvas */
+    const cv = document.createElement('canvas');
+    cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 0.45s;';
+    titleEl.style.position = 'relative';
+    titleEl.appendChild(cv);
+    const ctx = cv.getContext('2d');
+
+    let pts = [], raf = null, live = false, settleTimer = null;
+
+    function build() {
+        const W = titleEl.offsetWidth, H = titleEl.offsetHeight;
+        cv.width = W; cv.height = H;
+
+        const off = document.createElement('canvas');
+        off.width = W; off.height = H;
+        const oc = off.getContext('2d');
+
+        const s1 = parseFloat(getComputedStyle(ht1).fontSize);
+        const s2 = parseFloat(getComputedStyle(ht2).fontSize);
+        const gap = s1 * 0.08;
+
+        oc.font = `900 ${s1}px 'Playfair Display', serif`;
+        oc.fillStyle = '#fff';
+        oc.textAlign = 'center';
+        oc.fillText('Saatvik', W / 2, s1 * 0.88);
+
+        oc.font = `900 ${s2}px 'Playfair Display', serif`;
+        oc.fillText('Rao', W / 2, s1 * 0.88 + s2 + gap);
+
+        const px = oc.getImageData(0, 0, W, H).data;
+        pts = [];
+        const STEP = 9;
+        for (let y = 0; y < H; y += STEP) {
+            for (let x = 0; x < W; x += STEP) {
+                if (px[(y * W + x) * 4 + 3] > 80) {
+                    const isRao = y > s1 * 0.95;
+                    pts.push({
+                        ox: x, oy: y, x, y, vx: 0, vy: 0,
+                        r: Math.random() * 1.4 + 0.7,
+                        col: isRao ? '#c0562e' : '#1a1a1a',
+                    });
+                }
+            }
+        }
+    }
+
+    function tick() {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+
+        /* constellation lines */
+        const LINK = 22;
+        for (let i = 0; i < pts.length; i++) {
+            for (let j = i + 1; j < pts.length; j++) {
+                const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                if (d < LINK) {
+                    ctx.strokeStyle = `rgba(13,13,13,${(1 - d / LINK) * 0.22})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(pts[i].x, pts[i].y);
+                    ctx.lineTo(pts[j].x, pts[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        /* particles with spring physics */
+        for (const p of pts) {
+            const jitter = live ? (Math.random() - 0.5) * 1.2 : 0;
+            p.vx += (p.ox - p.x) * 0.055 + jitter;
+            p.vy += (p.oy - p.y) * 0.055 + jitter;
+            p.vx *= 0.80; p.vy *= 0.80;
+            p.x += p.vx; p.y += p.vy;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.col;
+            ctx.fill();
+        }
+
+        raf = requestAnimationFrame(tick);
+    }
+
+    function stopRaf() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+    titleEl.addEventListener('mouseenter', () => {
+        live = true;
+        clearTimeout(settleTimer);
+        cv.style.opacity = '1';
+        ht1.style.cssText += ';transition:opacity 0.35s;opacity:0.12;';
+        ht2.style.cssText += ';transition:opacity 0.35s;opacity:0.12;';
+
+        /* burst outward */
+        pts.forEach(p => { p.vx = (Math.random()-0.5)*18; p.vy = (Math.random()-0.5)*18; });
+
+        stopRaf(); tick();
     });
-    nameEl.addEventListener('mouseleave', () => {
-        scrambleStop(ht1); scrambleTo(ht1, 'Saatvik', 0.5);
-        scrambleStop(ht2); scrambleTo(ht2, 'Rao', 0.6);
+
+    titleEl.addEventListener('mouseleave', () => {
+        live = false;
+        cv.style.opacity = '0';
+        ht1.style.opacity = '1';
+        ht2.style.opacity = '1';
+        /* let particles settle back then kill raf */
+        settleTimer = setTimeout(stopRaf, 1400);
+    });
+
+    document.fonts.ready.then(() => {
+        build();
+        window.addEventListener('resize', build);
     });
 })();
 
