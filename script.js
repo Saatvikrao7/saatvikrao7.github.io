@@ -441,20 +441,23 @@ window.addEventListener('load', () => {
 })();
 
 
-/* ── Hover right flanker → swap CONSULTANT ↔ @ DELOITTE ── */
+/* ── Auto-cycle right flanker: CONSULTANT ↔ @ DELOITTE every 10s ── */
 (function() {
     const span = document.querySelector('#flanker-right span');
     if (!span) return;
-    let alt = false;
-    span.addEventListener('mouseenter', () => {
-        if (alt) return;
-        alt = true;
-        scrambleTo(span, span.dataset.alt, 0.45);
-    });
-    span.addEventListener('mouseleave', () => {
-        alt = false;
-        scrambleTo(span, span.dataset.text, 0.45);
-    });
+    let showingAlt = false;
+    setInterval(() => {
+        showingAlt = !showingAlt;
+        scrambleTo(span, showingAlt ? span.dataset.alt : span.dataset.text, 0.45, () => {
+            // after landing on @ DELOITTE, flip back after 2.5s
+            if (showingAlt) {
+                setTimeout(() => {
+                    showingAlt = false;
+                    scrambleTo(span, span.dataset.text, 0.45);
+                }, 2500);
+            }
+        });
+    }, 10000);
 })();
 
 
