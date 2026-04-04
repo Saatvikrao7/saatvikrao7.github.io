@@ -608,6 +608,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="script.js?v=2"></script>
+    <style>
+    /* ── Card flip — inline to bypass style.css cache ── */
+    .proj-card-inner { position: relative; }
+    .proj-card-front {
+        transition: transform 0.22s ease-in, opacity 0.22s ease-in;
+        transform-origin: center;
+    }
+    .proj-card.flipped .proj-card-front {
+        transform: scaleX(0);
+        opacity: 0;
+        pointer-events: none;
+    }
+    .proj-card-back {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #e8e5de;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        cursor: pointer;
+        transform: scaleX(0);
+        opacity: 0;
+        transform-origin: center;
+        transition: transform 0.22s ease-out 0.18s, opacity 0.22s ease-out 0.18s;
+        pointer-events: none;
+    }
+    .proj-card.flipped .proj-card-back {
+        transform: scaleX(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    </style>
     <script>
     /* card flip — inline so cache never blocks it */
     document.addEventListener('click', function(e) {
