@@ -870,10 +870,10 @@ if (tickerEl) {
 
 
 /* ── Project Card Flip ── */
-document.querySelectorAll('.proj-card:not(.proj-card--dim)').forEach(card => {
-    card.addEventListener('click', () => {
-        card.classList.toggle('flipped');
-    });
+document.addEventListener('click', e => {
+    const card = e.target.closest('.proj-card');
+    if (!card || card.classList.contains('proj-card--dim')) return;
+    card.classList.toggle('flipped');
 });
 
 
